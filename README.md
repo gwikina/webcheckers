@@ -9,7 +9,8 @@ a web micro-framework.
 - Heather Moses
 - Barak Binyamin 
 - Shane Dekker
-- MEMBER4
+- Gideon Wikina
+- MEMBER5
 
 
 ## Prerequisites
