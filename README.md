@@ -8,7 +8,7 @@ a web micro-framework.
 
 - Heather Moses
 - Barak Binyamin 
-- MEMBER3
+- Shane Dekker
 - MEMBER4
 
 
