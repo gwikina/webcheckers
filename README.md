@@ -7,7 +7,7 @@ a web micro-framework.
 ## Team
 
 - Heather Moses
-- Barak Binyamin
+- Barak Binyamin 
 - MEMBER3
 - MEMBER4
 
