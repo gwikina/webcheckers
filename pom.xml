@@ -12,7 +12,7 @@
 
     <!-- General build properties -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jdk.version>11</jdk.version>
+    <jdk.version>1.8</jdk.version>
 
     <!-- Application build dependency versions -->
     <maven.compiler.version>3.8.0</maven.compiler.version>
