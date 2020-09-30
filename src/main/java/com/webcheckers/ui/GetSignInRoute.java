@@ -37,9 +37,9 @@ public class GetSignInRoute implements Route {
         final boolean currentUser = true;
         storeCurrentUser(currentUser, request.session());
         final Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome!");
+        vm.put("title", "Sign in");
         vm.put("message", SIGNIN_MSG);
-        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
 
     private void storeCurrentUser(boolean currentUser, Session session){
