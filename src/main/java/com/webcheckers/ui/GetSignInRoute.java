@@ -24,7 +24,7 @@ import static spark.Spark.halt;
 public class GetSignInRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-    private static final Message WELCOME_MSG = Message.info("sign in page");
+    private static final Message SIGNIN_MSG = Message.info("sign in");
 
     private final TemplateEngine templateEngine;
 
@@ -34,15 +34,15 @@ public class GetSignInRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        final String currentUser = "test";
+        final boolean currentUser = true;
         storeCurrentUser(currentUser, request.session());
         final Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
-        vm.put("message", WELCOME_MSG);
+        vm.put("message", SIGNIN_MSG);
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
-    private void storeCurrentUser(String currentUser, Session session){
+    private void storeCurrentUser(boolean currentUser, Session session){
         session.attribute("currentUser", currentUser);
     }
 }
