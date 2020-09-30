@@ -24,44 +24,25 @@ import static spark.Spark.halt;
 public class GetSignInRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-    private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+    private static final Message WELCOME_MSG = Message.info("sign in page");
 
     private final TemplateEngine templateEngine;
 
-    /**
-     * Create the Spark Route (UI controller) to handle all {@code GET /} HTTP requests.
-     *
-     * @param templateEngine
-     *   the HTML template rendering engine
-     */
-    public GetSignInRoute(final TemplateEngine templateEngine) {
+    public GetSignInRoute(TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-        //
-        LOG.config("GetSignInRoute is initialized.");
     }
 
-    /**
-     * Render the WebCheckers Home page.
-     *
-     * @param request
-     *   the HTTP request
-     * @param response
-     *   the HTTP response
-     *
-     * @return
-     *   the rendered HTML for the Home page
-     */
     @Override
     public Object handle(Request request, Response response) {
-        LOG.finer("GetHomeRoute is invoked.");
-        //
-        Map<String, Object> vm = new HashMap<>();
+        final String currentUser = "test";
+        storeCurrentUser(currentUser, request.session());
+        final Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
-
-        // display a user message in the Home page
         vm.put("message", WELCOME_MSG);
+        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+    }
 
-        // render the View
-        return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+    private void storeCurrentUser(String currentUser, Session session){
+        session.attribute("currentUser", currentUser);
     }
 }
