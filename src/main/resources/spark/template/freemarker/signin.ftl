@@ -20,9 +20,9 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
-    <form name="currentUser" method="post">
-      <input type="text" name="test"/>
-      <input type="submit" value="test"/>
+    <form action="signedin" method="POST">
+      <input type="text" name="name" placeholder="Enter a name..."/>
+      <button type="submit">test</button>
     </form>
 
     <!-- TODO: future content on the Home:
