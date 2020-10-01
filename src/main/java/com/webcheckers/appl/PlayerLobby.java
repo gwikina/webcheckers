@@ -1,12 +1,11 @@
 package com.webcheckers.appl;
 import com.webcheckers.model.Player;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import spark.*;
 
 import java.util.*;
 
 public class PlayerLobby implements Route {
+    private final TemplateEngine templateEngine;
 
     private ArrayList<Player> users;
 
@@ -22,14 +21,30 @@ public class PlayerLobby implements Route {
 
 
 
+    @Override
+    public Object handle(Request request, Response response) {
+        final String name = request.queryParams("name");
+        storeCurrentUser(name, request.session());
+        final Map<String, Object> vm = new HashMap<>();
+        vm.put("title", "Sign in");
+        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+    }
+
+    private void storeCurrentUser(String name, Session session){
+        name = session.attribute("name");
+        if (name==null) {
+            name = new String();
+        }
+        session.attribute("CurrentUser", name);
+    }
 
 
 
 
 
 
-
-    public PlayerLobby(){
+    public PlayerLobby(TemplateEngine templateEngine) {
+        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         users = new ArrayList<>();
         players = new ArrayList<>();
         gamePlayers = new ArrayList<>();
