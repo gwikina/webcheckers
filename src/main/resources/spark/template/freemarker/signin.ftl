@@ -20,10 +20,10 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
-    <form action="lobby" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" name="name" placeholder="Enter a name..."/>
-      <button type="submit">Sign In</button>
+    <form action="lobby" method="POST/GET">
+      <label for="currentUser">Name:</label>
+      <input type="text" name="currentUser" placeholder="Enter a name..."/>
+      <button type="submit">sign in</button>
     </form>
 
 
