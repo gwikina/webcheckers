@@ -9,7 +9,7 @@ public class PlayerLobby implements Route {
 
     private ArrayList<Player> users;
 
-    private ArrayList<Player> players;
+    private static ArrayList<Player> players;
 
     private ArrayList<Player> gamePlayers;
 
@@ -61,7 +61,7 @@ public class PlayerLobby implements Route {
     }
 
 
-    public void addPlayer(Player player){
+    public static void addPlayer(Player player){
         if(!players.contains(player) && player != null){
             players.add(player);
         }
@@ -89,7 +89,7 @@ public class PlayerLobby implements Route {
     }
 
 
-    public Player[] playerArray(ArrayList<Player> playerList){
+    public static Player[] playerArray(ArrayList<Player> playerList){
         Player[] playerNames = new Player[playerList.size()];
         for(int i = 0; i < playerList.size(); i++){
             playerNames[i] = playerList.get(i);
