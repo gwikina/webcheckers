@@ -23,7 +23,7 @@
     <form action="lobby" method="POST">
       <label for="name">Name:</label>
       <input type="text" name="name" placeholder="Enter a name..."/>
-      <button type="submit">test</button>
+      <button type="submit">Sign In</button>
     </form>
 
 
