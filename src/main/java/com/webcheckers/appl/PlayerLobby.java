@@ -4,10 +4,9 @@ import spark.*;
 
 import java.util.*;
 
-public class PlayerLobby implements Route {
-    private final TemplateEngine templateEngine;
+public class PlayerLobby {
 
-    private ArrayList<Player> users;
+    private static ArrayList<Player> users;
 
     private static ArrayList<Player> players;
 
@@ -20,31 +19,7 @@ public class PlayerLobby implements Route {
     private boolean choseInGame;
 
 
-
-    @Override
-    public Object handle(Request request, Response response) {
-        final String name = request.queryParams("name");
-        storeCurrentUser(name, request.session());
-        final Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Lobby");
-        return templateEngine.render(new ModelAndView(vm, "lobby.ftl"));
-    }
-
-    private void storeCurrentUser(String name, Session session){
-        name = session.attribute("name");
-        if (name==null) {
-            name = new String();
-        }
-        session.attribute("CurrentUser", name);
-    }
-
-
-
-
-
-
-    public PlayerLobby(TemplateEngine templateEngine) {
-        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+    public PlayerLobby() {
         users = new ArrayList<>();
         players = new ArrayList<>();
         gamePlayers = new ArrayList<>();
@@ -52,7 +27,7 @@ public class PlayerLobby implements Route {
     }
 
 
-    public boolean addUser(Player player){
+    public static boolean addUser(Player player){
         if(!users.contains(player) && player != null){
             users.add(player);
             return true;

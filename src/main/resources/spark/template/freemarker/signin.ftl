@@ -20,7 +20,7 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
-    <form action="lobby" method="POST/GET">
+    <form action="game" method="GET">
       <label for="currentUser">Name:</label>
       <input type="text" name="currentUser" placeholder="Enter a name..."/>
       <button type="submit">sign in</button>
