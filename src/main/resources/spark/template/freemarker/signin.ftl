@@ -20,17 +20,12 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
-    <form action="signedin" method="POST">
+    <form action="signin" method="POST">
       <label for="name">Name:</label>
       <input type="text" name="name" placeholder="Enter a name..."/>
       <button type="submit">test</button>
     </form>
 
-    <!-- TODO: future content on the Home:
-            to start games,
-            spectating active games,
-            or replay archived games
-    -->
 
   </div>
 
