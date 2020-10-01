@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.webcheckers.*;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Board;
+import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -33,6 +34,8 @@ public class GetGameRoute implements Route {
         Player player1= new Player("Heather");
         Player currentUser= new Player("John");
         Board board = new Board(player1, currentUser);
+        BoardView boardView = new BoardView(board, currentUser);
+
         Message MSG = Message.info("It is Johns Turn");
         vm.put("currentUser", currentUser);
         vm.put("title", "WebCheckers");
@@ -41,7 +44,7 @@ public class GetGameRoute implements Route {
         vm.put("redPlayer", player1);
         vm.put("whitePlayer", currentUser);
         vm.put("activeColor", "RED");
-        vm.put("board", board);
+        vm.put("board", boardView);
         vm.put("message", MSG);
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
