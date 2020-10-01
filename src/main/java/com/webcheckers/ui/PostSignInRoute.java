@@ -24,17 +24,19 @@ public class PostSignInRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        final String name = request.queryParams("name");
-        storeCurrentUser(name, request.session());
+        final String name = request.queryParams("currentUser");
+        System.out.println(name);
+        Player newPlayer = new Player(name);
+        storeCurrentUser(newPlayer, request.session());
         final Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign in");
         vm.put("message", SIGNIN_MSG);
-        vm.put("currentUser", name);
-        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        vm.put("currentUser", newPlayer);
+        System.out.println(newPlayer.getName());
+        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
-    private void storeCurrentUser(String name, Session session){
-        Player newPlayer = new Player(name);
+    private void storeCurrentUser(Player newPlayer, Session session){
         this.lobby.addGamePlayer(newPlayer);
         session.attribute("currentUser", newPlayer);
         this.lobby.addUser(newPlayer);

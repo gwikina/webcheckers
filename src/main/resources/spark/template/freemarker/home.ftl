@@ -20,6 +20,11 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
+    <#if currentUser??>
+        yup
+      <#else>
+        nope
+      </#if>
     <!-- TODO: future content on the Home:
             to start games,
             spectating active games,
