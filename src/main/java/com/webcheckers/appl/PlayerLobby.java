@@ -1,9 +1,12 @@
 package com.webcheckers.appl;
 import com.webcheckers.model.Player;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 import java.util.*;
 
-public class PlayerLobby {
+public class PlayerLobby implements Route {
 
     private ArrayList<Player> users;
 
@@ -16,6 +19,14 @@ public class PlayerLobby {
     private Player white;
 
     private boolean choseInGame;
+
+
+
+
+
+
+
+
 
 
     public PlayerLobby(){
@@ -101,5 +112,4 @@ public class PlayerLobby {
     public boolean isChoseInGame(){
         return choseInGame;
     }
-
 }
