@@ -21,8 +21,8 @@ public class PostSignInRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        final String name = request.queryParams("name");
-        storeCurrentUser(name, request.session());
+        final String currentUser = request.queryParams("currentUser");
+        storeCurrentUser(currentUser, request.session());
         final Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign in");
         vm.put("message", SIGNIN_MSG);
