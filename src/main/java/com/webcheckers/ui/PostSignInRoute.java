@@ -30,7 +30,6 @@ public class PostSignInRoute implements Route {
     }
 
     private void storeCurrentUser(String name, Session session){
-        name = session.attribute("name");
         if (name==null) {
             name = new String();
         }
