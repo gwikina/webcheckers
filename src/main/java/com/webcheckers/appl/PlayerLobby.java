@@ -27,7 +27,7 @@ public class PlayerLobby implements Route {
         storeCurrentUser(name, request.session());
         final Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign in");
-        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        return templateEngine.render(new ModelAndView(vm, "lobby.ftl"));
     }
 
     private void storeCurrentUser(String name, Session session){
