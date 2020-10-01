@@ -37,15 +37,17 @@ public class PostSignInRoute implements Route {
     }
 
     private void storeCurrentUser(Player newPlayer, Session session){
-        this.lobby.addGamePlayer(newPlayer);
         session.attribute("currentUser", newPlayer);
+        this.lobby.addGamePlayer(newPlayer);
         this.lobby.addUser(newPlayer);
-        ArrayList<Player> names = session.attribute("names");
+        ArrayList<String> names = session.attribute("names");
         if (names == null) {
-            names = new ArrayList<Player>();
+            names = new ArrayList<String>();
             session.attribute("names", names);
+            names.add(newPlayer.name);
         }
-        session.attribute("names", this.lobby.getGamePlayers());
+        session.attribute("names", names);
+        System.out.println(names);
     }
 
 }

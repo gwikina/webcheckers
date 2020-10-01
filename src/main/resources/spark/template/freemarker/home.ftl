@@ -21,9 +21,17 @@
     <#include "message.ftl" />
 
     <#if currentUser??>
-        yup
-      <#else>
-        nope
+    <form action="game" method="GET">
+          <button type="submit">start game</button>
+        </form>
+        <#if names??>
+            <ol>
+            <#list names as n>
+              <li>${n}</li>
+            </#list>
+            <ol>
+           <#else>
+          </#if>
       </#if>
     <!-- TODO: future content on the Home:
             to start games,

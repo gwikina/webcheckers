@@ -36,7 +36,7 @@ public class GetGameRoute implements Route {
         Board board = new Board(player1, currentUser);
         BoardView boardView = new BoardView(board, currentUser);
 
-        Message MSG = Message.info("It is Johns Turn");
+        Message MSG = Message.info("Please wait for Heather to play");
         vm.put("currentUser", currentUser);
         vm.put("title", "WebCheckers");
         vm.put("gameID", "00000000");
