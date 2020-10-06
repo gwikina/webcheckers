@@ -27,27 +27,32 @@ public class PostSignInRoute implements Route {
         final String name = request.queryParams("currentUser");
         System.out.println(name);
         Player newPlayer = new Player(name);
-        storeCurrentUser(newPlayer, request.session());
+        ArrayList<Player> names = storeCurrentUser(newPlayer, request.session());
         final Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Sign in");
+        //TODO check name, optionally post Welcome
+        vm.put("title", "Welcome!");
         vm.put("message", SIGNIN_MSG);
         vm.put("currentUser", newPlayer);
+        vm.put("names", names);
         System.out.println(newPlayer.getName());
-        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
 
-    private void storeCurrentUser(Player newPlayer, Session session){
-        session.attribute("currentUser", newPlayer);
-        this.lobby.addGamePlayer(newPlayer);
-        this.lobby.addUser(newPlayer);
-        ArrayList<String> names = session.attribute("names");
+    private ArrayList<Player> storeCurrentUser(Player newPlayer, Session session){
+        ArrayList<Player> names = session.attribute("names");
         if (names == null) {
-            names = new ArrayList<String>();
-            session.attribute("names", names);
-            names.add(newPlayer.name);
+            names = new ArrayList<Player>();
         }
-        session.attribute("names", names);
-        System.out.println(names);
+        if (!this.lobby.getUsers().contains(newPlayer)) {
+            session.attribute("currentUser", newPlayer);
+            //this.lobby.addGamePlayer(newPlayer);
+            this.lobby.addUser(newPlayer);
+            names.add(newPlayer);
+            session.attribute("names", names);
+        }
+        System.out.println("lobby=" + this.lobby.getUsers());
+        System.out.println("names=" + names);
+        return names;
     }
 
 }
