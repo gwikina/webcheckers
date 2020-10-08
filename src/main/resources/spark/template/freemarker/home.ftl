@@ -20,6 +20,25 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
+ <#if currentUser??>
+    <form action="game" method="GET">
+          <button type="submit">start game</button>
+        </form>
+ </#if>
+
+<div>
+  <#if currentUser??>
+      <#if names??>
+          <ol>
+          <#list names as user>
+            <li>${user.name}</li>
+          </#list>
+          <ol>
+        <#else>
+               no players, sorry :(
+      </#if>
+    </#if>
+</div>
     <!-- TODO: future content on the Home:
             to start games,
             spectating active games,

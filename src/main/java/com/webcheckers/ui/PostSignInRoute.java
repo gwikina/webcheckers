@@ -31,11 +31,10 @@ public class PostSignInRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         //TODO check name, optionally post Welcome
         vm.put("title", "Welcome!");
-        vm.put("message", SIGNIN_MSG);
         vm.put("currentUser", newPlayer);
         vm.put("names", names);
         System.out.println(newPlayer.getName());
-        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
     private ArrayList<Player> storeCurrentUser(Player newPlayer, Session session){

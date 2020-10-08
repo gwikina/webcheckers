@@ -29,26 +29,6 @@
     </form>
     </#if>
 
- <#if currentUser??>
-    <form action="game" method="GET">
-          <button type="submit">start game</button>
-        </form>
- </#if>
-
-<div>
-  <#if currentUser??>
-      <#if names??>
-          <ol>
-          <#list names as user>
-            <li>${user.name}</li>
-          </#list>
-          <ol>
-        <#else>
-               no players, sorry :(
-      </#if>
-    </#if>
-</div>
-
 
 
 
