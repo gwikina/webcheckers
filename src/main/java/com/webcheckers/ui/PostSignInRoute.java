@@ -45,12 +45,10 @@ public class PostSignInRoute implements Route {
         }
         if (!this.lobby.getUsers().contains(newPlayer)) {
             session.attribute("currentUser", newPlayer);
-            //this.lobby.addGamePlayer(newPlayer);
             this.lobby.addUser(newPlayer);
             session.attribute("names", names);
         }
         System.out.println("lobby=" + this.lobby.getUsers());
-        System.out.println("names=" + names);
         return names;
     }
 
