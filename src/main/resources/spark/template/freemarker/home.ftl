@@ -28,10 +28,11 @@
           <#list names as user>
           <#if user!=currentUser>
           <form action="game" method="Post">
-            <li name="opponent">${user.name}
-            <button type="submit">start game with player ${user.name}</button>
+            <li>${user.name}
+                <button type="submit">start game with player ${user.name}</button>
+                <input type="text" style="display:none" name="opponent" value="${user.name}"/>
             </li>
-            </form>
+          </form>
             <#else>
             <li>${user.name}</li>
            </#if>

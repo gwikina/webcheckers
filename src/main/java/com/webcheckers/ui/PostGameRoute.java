@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.*;
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Board;
 import com.webcheckers.model.BoardView;
@@ -20,24 +21,26 @@ public class PostGameRoute implements Route {
     private final TemplateEngine templateEngine;
 
     private PlayerLobby lobby;
+    private GameCenter gameCenter;
 
 
-    public PostGameRoute(TemplateEngine templateEngine, PlayerLobby lobby) {
+    public PostGameRoute(TemplateEngine templateEngine, PlayerLobby lobby, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.lobby = lobby;
+        this.gameCenter = gameCenter;
     }
 
     @Override
     public Object handle(Request request, Response response) {
-        String name = request.queryParams("opponent");
-        lobb
-        System.out.println(name);
+        String opponentName = request.queryParams("opponent");
+        Player opponent = lobby.getUser(opponentName);
+        System.out.println(opponentName);
+
 
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser= request.session().attribute("currentUser");
 
-        Player player1= new Player("Heather");
-        Board board = new Board(player1, currentUser);
+        Board board = new Board(opponent, currentUser);
         BoardView boardView = new BoardView(board, currentUser);
 
        // Message MSG = Message.info("Please wait for Heather to play");
@@ -45,8 +48,8 @@ public class PostGameRoute implements Route {
         vm.put("title", "WebCheckers");
         vm.put("gameID", "00000000");
         vm.put("viewMode", "PLAY");
-        vm.put("redPlayer", player1);
-        vm.put("whitePlayer", currentUser);
+        vm.put("redPlayer", currentUser);
+        vm.put("whitePlayer", opponent);
         vm.put("activeColor", "RED");
         vm.put("board", boardView);
         //vm.put("message", MSG);

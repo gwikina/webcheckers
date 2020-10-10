@@ -27,7 +27,7 @@ public class PostSignInRoute implements Route {
         final String name = request.queryParams("currentUser");
         System.out.println(name);
         final Map<String, Object> vm = new HashMap<>();
-        //TODO check name, optionally post Welcome, why does lobby do a post request?
+
         if (this.lobby.getUser(name)==null) {
             Player newPlayer = new Player(name);
             ArrayList<Player> names = storeCurrentUser(newPlayer, request.session());
