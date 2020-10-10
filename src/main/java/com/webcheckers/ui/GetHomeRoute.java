@@ -64,6 +64,9 @@ public class GetHomeRoute implements Route {
     vm.put("message", WELCOME_MSG);
     Player currentUser = request.session().attribute("currentUser");
     ArrayList<Player> names = request.session().attribute("names");
+    if (names!=null){
+      vm.put("lobbyNumber", names);
+    }
     if (currentUser != null){
       vm.remove("message");
       vm.put("currentUser", currentUser);

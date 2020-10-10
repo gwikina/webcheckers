@@ -151,10 +151,12 @@ public class WebServer {
     get(HOME_URL, new GetHomeRoute(templateEngine, lobby));
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
     post(LOBBY_URL, new PostSignInRoute(templateEngine, lobby));
-    get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));// TODO this is why it lops to signIN
-    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));//todo sign out
-    get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));//todo sign out
+    get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));
+    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));
+    get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
     get(GAME_URL, new GetGameRoute(templateEngine));
+    post(GAME_URL, new PostGameRoute(templateEngine, lobby));
+
 
     //
     LOG.config("WebServer is initialized.");

@@ -20,22 +20,25 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
- <#if currentUser??>
-    <form action="game" method="GET">
-          <button type="submit">start game</button>
-        </form>
- </#if>
-
 <div>
   <#if currentUser??>
+    <h2>Players Online</h2>
       <#if names??>
-          <ol>
+          <ul>
           <#list names as user>
+          <#if user!=currentUser>
+          <form action="game" method="Post">
+            <li name="opponent">${user.name}
+            <button type="submit">start game with player ${user.name}</button>
+            </li>
+            </form>
+            <#else>
             <li>${user.name}</li>
+           </#if>
           </#list>
-          <ol>
+          <ul>
         <#else>
-               no players, sorry :(
+               There are no players in the lobby
       </#if>
     </#if>
 </div>
