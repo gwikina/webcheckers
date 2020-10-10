@@ -57,6 +57,8 @@ public class WebServer {
   public static final String SIGNIN_URL = "signin";
   public static final String LOBBY_URL = "lobby";
   public static final String GAME_URL = "game";
+  public static final String SIGNOUT_URL = "signout";
+
 
 
 
@@ -146,10 +148,12 @@ public class WebServer {
 
     // Shows the Checkers game Home page.
     //PostSignInRoute signIn = new PostSignInRoute(templateEngine, lobby);
-    get(HOME_URL, new GetHomeRoute(templateEngine));
+    get(HOME_URL, new GetHomeRoute(templateEngine, lobby));
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
     post(LOBBY_URL, new PostSignInRoute(templateEngine, lobby));
-    get(LOBBY_URL, new PostSignInRoute(templateEngine, lobby));
+    get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));// TODO this is why it lops to signIN
+    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));//todo sign out
+    get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));//todo sign out
     get(GAME_URL, new GetGameRoute(templateEngine));
 
     //

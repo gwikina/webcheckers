@@ -23,6 +23,7 @@ public class GetGameRoute implements Route {
 
     private PlayerLobby lobby;
 
+
     public GetGameRoute(TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
     }

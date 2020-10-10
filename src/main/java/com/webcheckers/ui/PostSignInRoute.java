@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class PostSignInRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
 
-    private static final Message SIGNIN_MSG = Message.info("sign in");
+    private static final Message FAILED = Message.info("Sorry, a user with that name already exists, please choose a different name");
 
     private final TemplateEngine templateEngine;
 
@@ -26,15 +26,22 @@ public class PostSignInRoute implements Route {
     public Object handle(Request request, Response response) {
         final String name = request.queryParams("currentUser");
         System.out.println(name);
-        Player newPlayer = new Player(name);
-        ArrayList<Player> names = storeCurrentUser(newPlayer, request.session());
         final Map<String, Object> vm = new HashMap<>();
-        //TODO check name, optionally post Welcome
-        vm.put("title", "Welcome!");
-        vm.put("currentUser", newPlayer);
-        vm.put("names", names);
-        System.out.println(newPlayer.getName());
-        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        //TODO check name, optionally post Welcome, why does lobby do a post request?
+        if (this.lobby.getUser(name)==null) {
+            Player newPlayer = new Player(name);
+            ArrayList<Player> names = storeCurrentUser(newPlayer, request.session());
+            vm.put("title", "Welcome!");
+            vm.put("currentUser", newPlayer);
+            vm.put("names", names);
+            System.out.println(newPlayer.getName());
+            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        }
+        else{
+            vm.put("title", "Welcome!");
+            vm.put("message", FAILED);
+            return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        }
     }
 
     private ArrayList<Player> storeCurrentUser(Player newPlayer, Session session){

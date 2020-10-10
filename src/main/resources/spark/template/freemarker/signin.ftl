@@ -21,7 +21,7 @@
     <#include "message.ftl" />
 
     <#if !currentUser??>
-    <form action="lobby" method="GET">
+    <form action="lobby" method="POST">
       <label for="currentUser">Name:</label>
       <input type="text" name="currentUser" minlength="1" pattern="[A-Za-z0-9][A-Za-z0-9 ]{0,20}" required title="May only contain alpha-numeric
       characters and spaces up to 20 characters long, may not start wit a space" placeholder="Enter a name..."/>
