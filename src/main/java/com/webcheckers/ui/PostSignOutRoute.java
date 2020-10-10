@@ -46,6 +46,7 @@ public class PostSignOutRoute implements Route {
         if (names == null) {
             names = this.lobby.getUsers();
         }
+
         session.attribute("currentUser", null);
         this.lobby.removeUser(currentUser);
         session.attribute("names", names);
