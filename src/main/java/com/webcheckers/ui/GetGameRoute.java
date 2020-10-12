@@ -1,9 +1,11 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.*;
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Board;
 import com.webcheckers.model.BoardView;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -17,15 +19,13 @@ import java.util.logging.Logger;
 public class GetGameRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
 
-    private static final Message SIGNIN_MSG = Message.info("sign in");
-
     private final TemplateEngine templateEngine;
 
-    private PlayerLobby lobby;
+    private GameCenter gameCenter;
 
-
-    public GetGameRoute(TemplateEngine templateEngine) {
+    public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        this.gameCenter = gameCenter;
     }
 
     @Override
@@ -33,20 +33,22 @@ public class GetGameRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser= request.session().attribute("currentUser");
 
+        Game game = this.gameCenter.getGame(currentUser);
+        Player opponent = game.getOpponent(currentUser);
 
-        Player player1= new Player("Heather");
-        Board board = new Board(player1, currentUser);
+        Board board = game.getBoard();
         BoardView boardView = new BoardView(board, currentUser);
-        Message MSG = Message.info("Please wait for Heather to play");
-        vm.put("currentUser", currentUser);
+
+        // Message MSG = Message.info("Please wait for Heather to play");
         vm.put("title", "WebCheckers");
-        vm.put("gameID", "00000000");
+        vm.put("currentUser", currentUser);
+        vm.put("gameID", game.getGameID());
         vm.put("viewMode", "PLAY");
-        vm.put("redPlayer", player1);
-        vm.put("whitePlayer", currentUser);
-        vm.put("activeColor", "RED");
+        vm.put("redPlayer", currentUser);
+        vm.put("whitePlayer", opponent);
+        vm.put("activeColor", board.getActiveColor());
         vm.put("board", boardView);
-        vm.put("message", MSG);
+        //vm.put("message", MSG);
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
 

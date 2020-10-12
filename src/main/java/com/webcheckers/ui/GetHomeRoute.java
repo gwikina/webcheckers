@@ -64,14 +64,19 @@ public class GetHomeRoute implements Route {
     vm.put("message", WELCOME_MSG);
     Player currentUser = request.session().attribute("currentUser");
     ArrayList<Player> names = request.session().attribute("names");
-    if (names!=null){
-      vm.put("lobbyNumber", names);
+    if (currentUser == null & names!=null){
+      vm.put("lobbyNumber", names.size());//TODO add this to home ftl
     }
     if (currentUser != null){
+      if (this.lobby.isInGame(currentUser)){
+        //TODO reroute player to game
+      }
+
       vm.remove("message");
       vm.put("currentUser", currentUser);
       vm.put("names", names);
     }
+
 
     // render the View
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
