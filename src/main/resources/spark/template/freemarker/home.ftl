@@ -22,7 +22,7 @@
 
 <div>
   <#if currentUser??>
-    <h2>Players Online</h2>
+      <h2>Players Online</h2>
       <#if names??>
           <ul>
           <#list names as user>
@@ -42,6 +42,8 @@
                There are no players in the lobby
       </#if>
     </#if>
+
+
 </div>
     <!-- TODO: future content on the Home:
             to start games,

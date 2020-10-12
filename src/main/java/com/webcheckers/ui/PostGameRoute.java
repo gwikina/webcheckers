@@ -51,7 +51,6 @@ public class PostGameRoute implements Route {
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);
 
-            // Message MSG = Message.info("Please wait for Heather to play");
             vm.put("title", "WebCheckers");
             vm.put("currentUser", currentUser);
             vm.put("gameID", game.getGameID());
@@ -60,12 +59,9 @@ public class PostGameRoute implements Route {
             vm.put("whitePlayer", opponent);
             vm.put("activeColor", board.getActiveColor());
             vm.put("board", boardView);
-            //vm.put("message", MSG);
             return templateEngine.render(new ModelAndView(vm, "game.ftl"));
         }   else{
-            //TODO (bad usage) --> crate get method or we'll get points off
-            //TODO reroute to home, other option is to edit ftl, if player isingame don't display button diable
-            get(WebServer.HOME_URL, new GetHomeRoute(templateEngine, lobby));
+            response.redirect(WebServer.HOME_URL);
             return templateEngine.render(new ModelAndView(vm, "game.ftl"));
         }
     }

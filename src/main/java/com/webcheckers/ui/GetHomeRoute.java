@@ -64,12 +64,9 @@ public class GetHomeRoute implements Route {
     vm.put("message", WELCOME_MSG);
     Player currentUser = request.session().attribute("currentUser");
     ArrayList<Player> names = request.session().attribute("names");
-    if (currentUser == null & names!=null){
-      vm.put("lobbyNumber", names.size());//TODO add this to home ftl
-    }
     if (currentUser != null){
       if (this.lobby.isInGame(currentUser)){
-        //TODO reroute player to game
+        response.redirect(WebServer.GAME_URL);
       }
 
       vm.remove("message");
