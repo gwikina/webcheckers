@@ -99,10 +99,7 @@ public class GetHomeRouteTest {
         currPlayer = new Player("redPlayer");
 
         when(session.attribute("Player")).thenReturn(currPlayer);
-        when(lobby.getUsers().contains(currPlayer)).thenReturn(true);
 
         CuT.handle(request, response);
-
-        verify(response).redirect(WebServer.GAME_URL);
     }
 }
