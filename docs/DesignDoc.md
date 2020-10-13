@@ -12,9 +12,10 @@ geometry: margin=1in
 * Team name: TheBestSwenTeam
 * Team members
   * Barak Binyamin
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Heather Moses
+  * Ella Shea
+  * Shane Dekker
+  * Gideon Wikina
 
 ## Executive Summary
 
