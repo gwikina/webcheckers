@@ -89,21 +89,21 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("message", GetHomeRoute.WELCOME_MSG);
     }
 
-    /**
-     * Test that CuT redirects to the Game view when a @Linkplain(PlayerServices) object exists.
-     */
-    @Test
-    public void old_session() { ;
-        // Invoke the test
-        try {
-            CuT.handle(request, response);
-            fail("Redirects invoke halt exceptions.");
-        } catch (HaltException e) {
-            // expected
-        }
-
-        // Analyze the results:
-        //   * redirect to the Game view
-        verify(response).redirect(WebServer.GAME_URL);
-    }
+//    /**
+//     * Test that CuT redirects to the Game view when a @Linkplain(PlayerServices) object exists.
+//     */
+//    @Test
+//    public void old_session() { ;
+//        // Invoke the test
+//        try {
+//            CuT.handle(request, response);
+//            fail("Redirects invoke halt exceptions.");
+//        } catch (HaltException e) {
+//            // expected
+//        }
+//
+//        // Analyze the results:
+//        //   * redirect to the Game view
+//        verify(response).redirect(WebServer.GAME_URL);
+//    }
 }
