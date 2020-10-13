@@ -32,7 +32,7 @@ public class GetSignInRouteTest {
         request = mock(Request.class);
         session = mock(Session.class);
         templateEngine = mock(TemplateEngine.class);
-        Response response = mock(Response.class);
+        response = mock(Response.class);
         PlayerLobby playerLobby = mock(PlayerLobby.class);
         CuT = new GetSignInRoute(templateEngine);
     }
