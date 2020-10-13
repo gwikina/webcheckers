@@ -50,6 +50,8 @@ public class GetHomeRouteTest {
     private TemplateEngine engine;
     private Response response;
     private PlayerLobby lobby;
+    private Player currPlayer;
+
     /**
      * Setup new mock objects for each test.
      */
@@ -87,5 +89,20 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelIsaMap();
         //   * model contains all necessary View-Model data
         testHelper.assertViewModelAttribute("message", GetHomeRoute.WELCOME_MSG);
+    }
+
+    /**
+     * Test that CuT shows the Home view when the session signed in.
+     */
+    @Test
+    public void session_signed_in() {
+        currPlayer = new Player("redPlayer");
+
+        when(session.attribute("Player")).thenReturn(currPlayer);
+        when(lobby.getUsers().contains(currPlayer)).thenReturn(true);
+
+        CuT.handle(request, response);
+
+        verify(response).redirect(WebServer.GAME_URL);
     }
 }
