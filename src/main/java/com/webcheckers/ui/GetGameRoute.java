@@ -33,22 +33,28 @@ public class GetGameRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser= request.session().attribute("currentUser");
 
-        Game game = this.gameCenter.getGame(currentUser);
-        Player opponent = game.getOpponent(currentUser);
+        if (currentUser!=null) {
+            Game game = this.gameCenter.getGame(currentUser);
+            //Player opponent = game.getOpponent(currentUser);
 
-        Board board = game.getBoard();
-        BoardView boardView = new BoardView(board, currentUser);
+            Board board = game.getBoard();
+            BoardView boardView = new BoardView(board, currentUser);
 
-        // Message MSG = Message.info("Please wait for Heather to play");
-        vm.put("title", "WebCheckers");
-        vm.put("currentUser", currentUser);
-        vm.put("gameID", game.getGameID());
-        vm.put("viewMode", "PLAY");
-        vm.put("redPlayer", game.getRedPlayer());
-        vm.put("whitePlayer",game.getWhitePlayer());
-        vm.put("activeColor", board.getActiveColor());
-        vm.put("board", boardView);
-        return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+            // Message MSG = Message.info("Please wait for Heather to play");
+            vm.put("title", "WebCheckers");
+            vm.put("currentUser", currentUser);
+            vm.put("gameID", game.getGameID());
+            vm.put("viewMode", "PLAY");
+            vm.put("redPlayer", game.getRedPlayer());
+            vm.put("whitePlayer", game.getWhitePlayer());
+            vm.put("activeColor", board.getActiveColor());
+            vm.put("board", boardView);
+            return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+        }
+        else{
+            response.redirect(WebServer.HOME_URL);
+            return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+        }
     }
 
 
