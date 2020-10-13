@@ -23,7 +23,7 @@ public class GameCenterTest {
      * Test the ability to make a new Game.
      */
     @Test
-    public void test_make_game() {
+    public void testMakeGame() {
         final GameCenter CuT = new GameCenter();
         // Invoke test
         // Friendly Player1
