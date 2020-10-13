@@ -9,23 +9,26 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: TheBestSwenTeam
 * Team members
-  * MEMBER1
+  * Barak Binyamin
   * MEMBER2
   * MEMBER3
   * MEMBER4
 
 ## Executive Summary
 
-This is a summary of the project.
+The web application Webcheckers allows players 
+to play checkers with other online players after signing in to the website.
+The game user interface consists of drag-and-drop interactions to the checkers board.
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+Users play against each other in a game of checkers, competing to capture all of their
+opponents pieces before losing all of their own.
+> important user group and user goals.
 
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
+>A table of terms and acronyms.
 
 | Term | Definition |
 |------|------------|
@@ -36,16 +39,43 @@ This is a summary of the project.
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
+Players must be able to sign-in to the application, view players in the lobby and 
+start a checkers game against other players. Players selected to be in
+a game must be redirected to their game.
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+Players must be able to sign-in to the application, view players in the lobby and 
+start a checkers game against other players. Players selected to be in
+a game must be redirected to their game.
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
 
+> <b>Player Sign-In</b>
+> > As a Player, I want to be able to sign-in so that I can play a game of checkers.
+>
+> <b>Player Sign-Out</b>
+> > As a Player who is signed into WebCheckers I want to be able to sign-out so that I am not placed in any new games.
+>
+> <b>Start a Game</b>
+> > As a Player, I want to start a game so that I can play checkers against an opponent.
+>
+> <b>Single Move</b>
+> > As a Player, I want to be able to move my pieces diagonally away from me so that I can advance towards the far end of the board.
+>
+> <b>JUMP MOVES</b>
+> > As a Player, I want to be forced to make an available jump move so that I will gain an advantage in the game.
+> >
+> > <b>Single Jump Move</b>
+> > > As a Player, I want to be able to jump diagonally forward with a single piece or in either direction with a King over an opponent piece so that I can eliminate the piece and advance in the game.
+> >
+> > <b>Multi Jump Move</b>
+> > > As a Player, I want to be able to diagonally jump over my opponents pieces in one turn so that I can eliminate two or more of their pieces.
+>
+> <b>Unable to Move</b>
+> > As a Player, I want to lose the game when I have no moves left so that I can move on and start a new game.
+>
+> <b>Winning</b>
+> > As a Player, I want to win the game by capturing all of my opponent pieces so that I can claim victory.
 ### Roadmap of Enhancements
 > _Provide a list of top-level features in the order you plan to consider them._
 
