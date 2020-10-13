@@ -28,7 +28,7 @@ import spark.TemplateEngine;
 /**
  * The unit test suite for the {@link GetHomeRoute} component.
  *
- * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
+ *
  */
 @Tag("UI-tier")
 public class GetHomeRouteTest {
@@ -88,22 +88,4 @@ public class GetHomeRouteTest {
         //   * model contains all necessary View-Model data
         testHelper.assertViewModelAttribute("message", GetHomeRoute.WELCOME_MSG);
     }
-
-//    /**
-//     * Test that CuT redirects to the Game view when a @Linkplain(PlayerServices) object exists.
-//     */
-//    @Test
-//    public void old_session() { ;
-//        // Invoke the test
-//        try {
-//            CuT.handle(request, response);
-//            fail("Redirects invoke halt exceptions.");
-//        } catch (HaltException e) {
-//            // expected
-//        }
-//
-//        // Analyze the results:
-//        //   * redirect to the Game view
-//        verify(response).redirect(WebServer.GAME_URL);
-//    }
 }
