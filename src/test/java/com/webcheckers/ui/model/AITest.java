@@ -5,7 +5,6 @@ import com.webcheckers.model.AI;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.Position;
-import javafx.geometry.Pos;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
