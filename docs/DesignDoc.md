@@ -26,7 +26,8 @@ The game user interface consists of drag-and-drop interactions to the checkers b
 ### Purpose
 Users play against each other in a game of checkers, competing to capture all of their
 opponents pieces before losing all of their own.
-> important user group and user goals.
+> Users: sign in, view active players, start a game, sign out
+> Players: make a move, play a game with an opponent, withdraw from a game
 
 ### Glossary and Acronyms
 >A table of terms and acronyms.
@@ -87,9 +88,10 @@ This section describes the application domain.
 
 ![The WebCheckers Domain Model](DomainModel.jpg)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+> _Our domain model consists of players, the checkers game, and
+>how these entities interact with each other. For example, a player
+>plays a checkers game, and each game has a board, which has
+>rows, columns, and squares._
 
 
 ## Architecture and Design
@@ -118,10 +120,12 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
+![The WebCheckers Web Interface Statechart](StateChart.png)
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+> _As a user uses our interface, an HTTP request is sent to 
+>render the home page. Then, the home page renders the sign in.
+>After the user signs in and chooses a player to play against, 
+>another request is sent to render the game page._
 
 
 ### UI Tier
