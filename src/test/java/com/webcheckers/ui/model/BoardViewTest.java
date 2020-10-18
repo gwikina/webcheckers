@@ -21,5 +21,5 @@ public class BoardViewTest {
         // Analyze results
         assertNotNull(board);
     }
-    
+
 }
