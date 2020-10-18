@@ -3,10 +3,12 @@ package com.webcheckers.ui.model;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.Space;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("Model-tier")
 public class SpaceTest {
 
     Space space1 = new Space(15, true);
