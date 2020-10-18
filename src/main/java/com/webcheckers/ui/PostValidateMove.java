@@ -40,11 +40,17 @@ public class PostValidateMove implements Route{
         ValidateMove evaluator = new ValidateMove();
         Game game = this.gameCenter.getGame(currentUser);;
         System.out.println(evaluator.validateMove(game, M));
-        Message message;
-        if (evaluator.validateMove(game, M)!= ValidateMove.Validation.VALID){
-            message = Message.error("nope");
-        }else{
-            message = Message.info("yeah");
+        Message message = null;
+        if (evaluator.validateMove(game, M)== ValidateMove.Validation.TOOFAR){
+            message = Message.error("Invalid Move: Please Move a Shorter Distance");
+        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.OCCUPIED) {
+            message = Message.error("Invalid Move: Please Move to an Open Tile");
+        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.JUMPNEEDED) {
+            message = Message.error("Invalid Move: Please Jump over the Opponent");
+        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.VALIDJUMP) {
+            message = Message.info("This is a valid Jump");
+        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.VALID) {
+            message = Message.info("Valid Move");
         }
         game.addMove(M);
 
