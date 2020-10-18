@@ -47,7 +47,7 @@ public class PlayerLobbyTest {
     }
 
     @Test
-    public void testRemovePlayer() {
+    public void testRemoveGamePlayer() {
         final PlayerLobby lobby = new PlayerLobby();
         // testing removing game players
         final Player player1 = new Player("Gideon");
@@ -169,6 +169,27 @@ public class PlayerLobbyTest {
         expected_players.add(player2);
         // Analyze results
         assertEquals(expected_players, list_of_players);
+    }
+
+    @Test
+    public void testRemovePlayer() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        lobby.addPlayer(player1);
+        lobby.addPlayer(player2);
+
+        lobby.removePlayer(player1);
+        ArrayList<Player> list_of_players = lobby.getPlayers();
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+        // Analyze results
+        assertEquals(expected_players, list_of_players);
+
     }
 
 }
