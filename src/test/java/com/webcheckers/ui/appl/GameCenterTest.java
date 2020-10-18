@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import com.webcheckers.model.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The unit test suite for the {@link GameCenter} component.
  *
@@ -34,6 +37,123 @@ public class GameCenterTest {
         final Game game = CuT.makeGame(player1, player2);
         // Analyze results
         assertNotNull(game);
+    }
+
+    /**
+     * Test the ability to get a Game.
+     */
+    @Test
+    public void testGetGame() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+        // Analyze results
+        assertNotNull(CuT.getGame(player1));
+    }
+
+    /**
+     * Test the ability to end a game.
+     */
+    @Test
+    public void testAddGameOver() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+        // Analyze results
+
+        assertNotNull(CuT.getGame(player1));
+
+        CuT.addGameOver(game);
+        assertNull(CuT.getGame(player1));
+    }
+
+    /**
+     * Test the containsKey method
+     */
+    @Test
+    public void testContainsKey() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+        // Analyze results
+
+
+        assertEquals(CuT.containsKey(player2), true);
+    }
+
+    /**
+     * Test the containsKey method
+     */
+    @Test
+    public void testGetGameInt() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+        int gameID = game.getGameID();
+        CuT.addGameOver(game);
+
+        // Analyze results
+        assertEquals(CuT.getGame(gameID), game);
+    }
+
+    /**
+     * Test the containsKey method
+     */
+    @Test
+    public void testGetGamesOver() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+        CuT.addGameOver(game);
+        List<Game> gameOver = new ArrayList<>();
+        gameOver.add(game);
+
+        // Analyze results
+        assertEquals(CuT.getGamesOver(), gameOver);
+    }
+
+    /**
+     * Test the containsKey method
+     */
+    @Test
+    public void testGetNumOfGames() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+        int numGames = 1;
+
+        // Analyze results
+        assertEquals(CuT.getNumOfGames(), numGames);
     }
 
 }
