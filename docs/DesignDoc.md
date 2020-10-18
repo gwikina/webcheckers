@@ -51,32 +51,37 @@ a game must be redirected to their game.
 
 ### MVP Features
 
-> <b>Player Sign-In</b>
-> > As a Player, I want to be able to sign-in so that I can play a game of checkers.
->
-> <b>Player Sign-Out</b>
-> > As a Player who is signed into WebCheckers I want to be able to sign-out so that I am not placed in any new games.
->
-> <b>Start a Game</b>
-> > As a Player, I want to start a game so that I can play checkers against an opponent.
->
-> <b>Single Move</b>
-> > As a Player, I want to be able to move my pieces diagonally away from me so that I can advance towards the far end of the board.
->
-> <b>JUMP MOVES</b>
-> > As a Player, I want to be forced to make an available jump move so that I will gain an advantage in the game.
-> >
-> > <b>Single Jump Move</b>
-> > > As a Player, I want to be able to jump diagonally forward with a single piece or in either direction with a King over an opponent piece so that I can eliminate the piece and advance in the game.
-> >
-> > <b>Multi Jump Move</b>
-> > > As a Player, I want to be able to diagonally jump over my opponents pieces in one turn so that I can eliminate two or more of their pieces.
->
-> <b>Unable to Move</b>
-> > As a Player, I want to lose the game when I have no moves left so that I can move on and start a new game.
->
-> <b>Winning</b>
-> > As a Player, I want to win the game by capturing all of my opponent pieces so that I can claim victory.
+
+<b>Basic piece moves</b>
+As a Player, I want to be able to sign-in so that I can play a game of checkers.
+As a Player, I want to be able to diagonally jump over my opponents pieces in one turn so that I can eliminate two or more of their pieces.
+As a Player, I want to lose the game when I have no moves left so that I can move on and start a new game.
+
+<b>Simple captures</b>
+ As a Player who is signed into WebCheckers I want to be able to sign-out so that I am not placed in any new games.
+
+<b>Multi-capture turns</b>
+As a Player, I want to start a game so that I can play checkers against an opponent.
+
+<b>Invalid moves including checking for required captures</b>
+As a Player, I want to be able to move my pieces diagonally away from me so that I can advance towards the far end of the board.
+
+<b>End of game scenario</b>
+As a Player, I want to be forced to make an available jump move so that I will gain an advantage in the game.
+<b>Single Jump Move</b>
+As a Player, I want to be able to jump diagonally forward with a single piece or in either direction with a King over an opponent piece so that I can eliminate the piece and advance in the game.
+
+<b>Winning</b>
+As a Player, I want to win the game by capturing all of my opponent pieces so that I can claim victory.
+
+<b>Kinging of a piece and the new move capabilities the King piece has</b>
+As a Player, I want to have my pieces that reach the opponent end of the board to become Kings so that I can move diagonally forwards and backwards.
+
+<b>Resignation</b>
+As a Player in an ongoing game I want to be able to forfeit from an ongoing game so that I can return to the lobby.
+As a Player, I want to win the game by capturing all of my opponent pieces so that I can claim victory.  
+
+
 ### Roadmap of Enhancements
 > _Provide a list of top-level features in the order you plan to consider them._
 
