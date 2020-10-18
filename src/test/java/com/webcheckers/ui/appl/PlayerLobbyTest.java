@@ -47,7 +47,7 @@ public class PlayerLobbyTest {
     }
 
     @Test
-    public void testRemoveUser() {
+    public void testRemoveGamePlayer() {
         final PlayerLobby lobby = new PlayerLobby();
         // testing removing game players
         final Player player1 = new Player("Gideon");
@@ -66,4 +66,130 @@ public class PlayerLobbyTest {
         assertEquals(expected_players, list_of_players);
 
     }
+
+    @Test
+    public void testGetUser() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        lobby.addUser(player1);
+        lobby.addUser(player2);
+
+        lobby.removeGamePlayer(player1);
+        ArrayList<Player> list_of_players = lobby.getGamePlayers();
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+        // Analyze results
+
+        assertEquals(lobby.getUser("Gideon"), player1);
+    }
+
+    @Test
+    public void testAddUser() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        final Player player3 = null;
+
+        lobby.addUser(player1);
+
+        lobby.removeGamePlayer(player1);
+        ArrayList<Player> list_of_players = lobby.getGamePlayers();
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+        // Analyze results
+
+        assertEquals(true, lobby.addUser(player2));
+        assertEquals(false, lobby.addUser(player3));
+    }
+
+    @Test
+    public void testAddPlayer() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        final Player player3 = null;
+
+        lobby.addGamePlayer(player1);
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+
+        // Analyze results
+        assertEquals(true, lobby.addPlayer(player2));
+        assertEquals(false, lobby.addPlayer(player3));
+    }
+
+    @Test
+    public void testRemoveUser() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        lobby.addUser(player1);
+        lobby.addUser(player2);
+
+        lobby.removeUser(player1);
+        ArrayList<Player> list_of_players = lobby.getUsers();
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+        // Analyze results
+        assertEquals(expected_players, list_of_players);
+    }
+
+    @Test
+    public void testPlayerChoseInGame() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        lobby.addUser(player1);
+        lobby.addUser(player2);
+
+        lobby.removeUser(player1);
+        ArrayList<Player> list_of_players = lobby.getUsers();
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+        // Analyze results
+        assertEquals(expected_players, list_of_players);
+    }
+
+    @Test
+    public void testRemovePlayer() {
+        final PlayerLobby lobby = new PlayerLobby();
+        // testing removing game players
+        final Player player1 = new Player("Gideon");
+
+        final Player player2 = new Player("Seth");
+
+        lobby.addPlayer(player1);
+        lobby.addPlayer(player2);
+
+        lobby.removePlayer(player1);
+        ArrayList<Player> list_of_players = lobby.getPlayers();
+
+        ArrayList <Player> expected_players = new ArrayList<Player>();
+        expected_players.add(player2);
+        // Analyze results
+        assertEquals(expected_players, list_of_players);
+
+    }
+
 }
