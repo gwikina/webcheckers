@@ -160,6 +160,7 @@ public class WebServer {
     post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));
     post("/validateMove", new PostValidateMove(templateEngine, gameCenter));
     post("/checkTurn", new PostCheckTurn(templateEngine, gameCenter));
+    post("/submitTurn", new PostSubmitTurn(templateEngine, gameCenter));
 
 
 

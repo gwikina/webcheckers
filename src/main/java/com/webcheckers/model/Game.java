@@ -125,7 +125,7 @@ public class Game {
         move.setMovedPiece(piece);
         board.updateBoard(move);
         this.addMove(move);
-        this.takePiece();
+        //this.takePiece(); TODO, fix it please
         this.turnMade = true;
         board.validateSpaces();
     }

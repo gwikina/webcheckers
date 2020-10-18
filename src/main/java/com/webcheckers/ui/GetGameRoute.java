@@ -38,12 +38,11 @@ public class GetGameRoute implements Route {
             //Player opponent = game.getOpponent(currentUser);
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);
-
             // Message MSG = Message.info("Please wait for Heather to play");
             vm.put("title", "WebCheckers");
             vm.put("currentUser", currentUser);
             vm.put("gameID", game.getGameID());
-            vm.put("viewMode", "PLAY");
+            vm.put("viewMode", "play");
             vm.put("redPlayer", game.getRedPlayer());
             vm.put("whitePlayer", game.getWhitePlayer());
             vm.put("activeColor", board.getActiveColor());

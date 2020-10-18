@@ -46,20 +46,7 @@ public class PostValidateMove implements Route{
         }else{
             message = Message.info("yeah");
         }
-
-        //vm.put("Message", message);
-//        Board board = game.getBoard();
-//        BoardView boardView = new BoardView(board, currentUser);
-//
-//        // Message MSG = Message.info("Please wait for Heather to play");
-//        vm.put("title", "WebCheckers");
-//        vm.put("currentUser", currentUser);
-//        vm.put("gameID", game.getGameID());
-//        vm.put("viewMode", "PLAY");
-//        vm.put("redPlayer", game.getRedPlayer());
-//        vm.put("whitePlayer", game.getWhitePlayer());
-//        vm.put("activeColor", board.getActiveColor());
-//        vm.put("board", boardView);
+        game.addMove(M);
 
         return json.toJson(message);
     }
