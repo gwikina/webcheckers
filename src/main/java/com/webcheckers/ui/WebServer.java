@@ -158,6 +158,7 @@ public class WebServer {
     get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
     get(GAME_URL, new GetGameRoute(templateEngine, gameCenter));
     post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));
+    post("/validateMove", new PostValidateMove(templateEngine, gameCenter));
 
 
     //

@@ -36,7 +36,6 @@ public class GetGameRoute implements Route {
         if (currentUser!=null) {
             Game game = this.gameCenter.getGame(currentUser);
             //Player opponent = game.getOpponent(currentUser);
-
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);
 

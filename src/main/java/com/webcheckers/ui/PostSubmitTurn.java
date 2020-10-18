@@ -17,8 +17,6 @@ import spark.TemplateEngine;
 public class PostSubmitTurn implements Route{
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
-    private static final Message SIGNIN_MSG = Message.info("Please sign in");
-
     private final TemplateEngine templateEngine;
 
     public PostSubmitTurn(TemplateEngine templateEngine) {
