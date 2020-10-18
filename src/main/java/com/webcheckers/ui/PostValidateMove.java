@@ -6,10 +6,7 @@ import java.util.logging.Logger;
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Game;
-import com.webcheckers.model.Move;
-import com.webcheckers.model.Player;
-import com.webcheckers.model.ValidateMove;
+import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
 import spark.ModelAndView;
 import spark.Request;
@@ -32,21 +29,39 @@ public class PostValidateMove implements Route{
 
     @Override
     public Object handle(Request request, Response response) {
+        final Map<String, Object> vm = new HashMap<>();
+
         String move = request.queryParams("actionData");
-        String gameID = request.queryParams("gameID");
+        Player currentUser= request.session().attribute("currentUser");
         System.out.println(move);
 
         Gson json = new Gson();
         Move M = json.fromJson(move, Move.class);
         ValidateMove evaluator = new ValidateMove();
-        Game game = this.gameCenter.getGame(Integer.getInteger(gameID));
-       // evaluator.validateMove(game, M);
+        Game game = this.gameCenter.getGame(currentUser);;
+        System.out.println(evaluator.validateMove(game, M));
+        Message message;
+        if (evaluator.validateMove(game, M)!= ValidateMove.Validation.VALID){
+            message = Message.error("nope");
+        }else{
+            message = Message.info("yeah");
+        }
 
+        //vm.put("Message", message);
+//        Board board = game.getBoard();
+//        BoardView boardView = new BoardView(board, currentUser);
+//
+//        // Message MSG = Message.info("Please wait for Heather to play");
+//        vm.put("title", "WebCheckers");
+//        vm.put("currentUser", currentUser);
+//        vm.put("gameID", game.getGameID());
+//        vm.put("viewMode", "PLAY");
+//        vm.put("redPlayer", game.getRedPlayer());
+//        vm.put("whitePlayer", game.getWhitePlayer());
+//        vm.put("activeColor", board.getActiveColor());
+//        vm.put("board", boardView);
 
-        final Map<String, Object> vm = new HashMap<>();
-//        vm.put("title", "Sign in");
-//        vm.put("message", SIGNIN_MSG);
-        return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+        return json.toJson(message);
     }
 
 }
