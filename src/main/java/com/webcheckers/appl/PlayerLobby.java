@@ -36,10 +36,12 @@ public class PlayerLobby {
     }
 
 
-    public static void addPlayer(Player player){
+    public static boolean addPlayer(Player player){
         if(!players.contains(player) && player != null){
             players.add(player);
+            return true;
         }
+        return false;
     }
 
     public void addGamePlayer(Player player){
