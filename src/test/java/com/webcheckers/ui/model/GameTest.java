@@ -1,11 +1,11 @@
 package com.webcheckers.ui.model;
 
-import com.webcheckers.model.Game;
-import com.webcheckers.model.Move;
-import com.webcheckers.model.Player;
-import com.webcheckers.model.Position;
+import com.webcheckers.model.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,4 +62,28 @@ public class GameTest {
         assertEquals(move, game.getRecentMove());
     }
 
+    @Test
+    public void testGetBoard() {
+        // Analyze results
+        assertNotNull(game.getBoard());
+    }
+
+    @Test
+    public void testGetID() {
+        // Analyze results
+        assertEquals(gameID, game.getGameID());
+    }
+
+    @Test
+    public void testIsTurnMade() {
+        // Analyze results
+        assertFalse(game.isTurnMade());
+    }
+
+    @Test
+    public void testPlayerList() {
+        ArrayList<Player> expectedPlayer = new ArrayList<Player>(Arrays.asList(this.redPlayer, this.whitePlayer));
+        // Analyze results
+        assertEquals(game.playerList(), expectedPlayer);
+    }
 }
