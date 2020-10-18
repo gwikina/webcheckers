@@ -46,4 +46,19 @@ public class AITest {
         // Analyze results
         assertEquals(false, ai.jumpAvailable(game, start));
     }
+
+    @Test
+    public void testDecideMove() {
+        final GameCenter CuT = new GameCenter();
+        // Invoke test
+        // Friendly Player1
+        final Player player1 = new Player("Rocky");
+        // Friendly Player2
+        final Player player2 = new Player("Ella");
+
+        final Game game = CuT.makeGame(player1, player2);
+
+        // Analyze results
+        assertNotNull(ai.decideMove(game));
+    }
 }
