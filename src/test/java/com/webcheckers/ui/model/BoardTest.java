@@ -40,8 +40,8 @@ public class BoardTest {
         // Analyze results
         assertFalse(board.isSpaceValid(1, 1));
         assertFalse(board.isSpaceValid(7, 7));
-        assertTrue(board.isSpaceValid(5, 6));
+        assertFalse(board.isSpaceValid(5, 6));
     }
-    
+
 
 }
