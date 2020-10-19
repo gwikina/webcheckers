@@ -50,10 +50,12 @@ public class GameCenterTest {
         final Player player1 = new Player("Rocky");
         // Friendly Player2
         final Player player2 = new Player("Ella");
+        final Player player3 = new Player("TEST");
 
         final Game game = CuT.makeGame(player1, player2);
         // Analyze results
         assertNotNull(CuT.getGame(player1));
+        assertNull(CuT.getGame(player3));
     }
 
     /**
