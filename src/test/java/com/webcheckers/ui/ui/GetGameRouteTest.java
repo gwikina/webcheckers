@@ -42,6 +42,7 @@ public class GetGameRouteTest {
     private Response response;
     private TemplateEngine engine;
     private GameCenter gameCenter;
+    private PlayerLobby playerLobby;
     /**
      * Setup new mock objects for each test.
      */
@@ -54,7 +55,7 @@ public class GetGameRouteTest {
         engine = mock(TemplateEngine.class);
 
         // create a unique CuT for each test
-        CuT = new GetGameRoute(engine, gameCenter );
+        CuT = new GetGameRoute(engine, playerLobby, gameCenter );
     }
 
     /**
