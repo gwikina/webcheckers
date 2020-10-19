@@ -2,6 +2,7 @@ package com.webcheckers.ui.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.webcheckers.model.Position;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,9 @@ public class PlayerTest {
      */
     @Test
     public void testEquals() {
+        Position position = new Position(1, 1);
         assertTrue(testPlayer.equals(testPlayer2));
+        assertFalse(position.equals(testPlayer2));
     }
 
 }
