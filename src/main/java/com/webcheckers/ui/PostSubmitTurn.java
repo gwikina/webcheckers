@@ -32,7 +32,6 @@ public class PostSubmitTurn implements Route{
 
     @Override
     public Object handle(Request request, Response response) {
-        String move = request.queryParams("actionData");
         Player currentUser= request.session().attribute("currentUser");
         Game game = this.gameCenter.getGame(currentUser);;
 

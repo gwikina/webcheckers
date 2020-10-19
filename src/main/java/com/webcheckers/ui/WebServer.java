@@ -156,7 +156,7 @@ public class WebServer {
     get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));
     post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));
     get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
-    get(GAME_URL, new GetGameRoute(templateEngine, gameCenter));
+    get(GAME_URL, new GetGameRoute(templateEngine, lobby, gameCenter));
     post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));
     post("/validateMove", new PostValidateMove(templateEngine, gameCenter));
     post("/checkTurn", new PostCheckTurn(templateEngine, gameCenter));
