@@ -25,12 +25,21 @@ public class PostCheckTurn implements Route{
 
     @Override
     public Object handle(Request request, Response response) {
-        final Map<String, Object> vm = new HashMap<>();
-
-        String move = request.queryParams("actionData");
         Player currentUser= request.session().attribute("currentUser");
 
-        Message message = Message.info("false");
+        Game game = gameCenter.getGame(currentUser);
+        Player redPlayer = game.getRedPlayer();
+        Player whitePlayer = game.getWhitePlayer();
+
+        Message message;
+
+        if (currentUser == redPlayer && game.getBoard().getActiveColor() == Piece.Color.RED ) {
+            message = Message.info("true");
+        }else if (currentUser == whitePlayer && game.getBoard().getActiveColor() == Piece.Color.WHITE ){
+            message = Message.info("true");
+        }else {
+            message = Message.info("false");
+        }
 
         Gson json = new Gson();
         return json.toJson(message);

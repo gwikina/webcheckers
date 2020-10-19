@@ -49,6 +49,7 @@ public class PostSubmitTurn implements Route{
         }else{
             message = Message.info("yeah");
             game.doTurn(M);
+            game.getBoard().changeActiveColor();
             //response.redirect(WebServer.GAME_URL);
         }
 
