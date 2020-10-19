@@ -39,4 +39,13 @@ public class PieceTest {
         assertEquals(Piece.Color.RED, piece2.getColor());
     }
 
+    @Test
+    public void testToString() {
+        // Analyze results
+        String string1 = "WHITE";
+        String string2 = "RED";
+        assertEquals(string1, piece1.toString());
+        assertEquals(string2, piece2.toString());
+    }
+
 }
