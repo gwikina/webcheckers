@@ -129,7 +129,7 @@ public class Board {
      */
     public void addPiece(int row, int col, Piece piece){
 
-        if(boardArray[row][col].getPiece() == null && isSpaceValid(row, col)){
+        if(boardArray[row][col].getPiece() != null && isSpaceValid(row, col)){
 
             boardArray[row][col].addPiece(piece);
 
