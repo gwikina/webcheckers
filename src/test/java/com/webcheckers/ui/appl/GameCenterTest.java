@@ -88,12 +88,14 @@ public class GameCenterTest {
         final Player player1 = new Player("Rocky");
         // Friendly Player2
         final Player player2 = new Player("Ella");
+        final Player player3 = new Player("TEST");
 
         final Game game = CuT.makeGame(player1, player2);
         // Analyze results
 
 
         assertEquals(CuT.containsKey(player2), true);
+        assertEquals(CuT.containsKey(player3), false);
     }
 
     /**
@@ -114,6 +116,7 @@ public class GameCenterTest {
 
         // Analyze results
         assertEquals(CuT.getGame(gameID), game);
+        assertEquals(CuT.getGame(00000), null);
     }
 
     /**
