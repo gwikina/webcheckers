@@ -42,7 +42,7 @@ public class GetGameRoute implements Route {
             vm.put("title", "WebCheckers");
             vm.put("currentUser", currentUser);
             vm.put("gameID", game.getGameID());
-            vm.put("viewMode", "play");
+            vm.put("viewMode", "PLAY");
             vm.put("redPlayer", game.getRedPlayer());
             vm.put("whitePlayer", game.getWhitePlayer());
             vm.put("activeColor", board.getActiveColor());
