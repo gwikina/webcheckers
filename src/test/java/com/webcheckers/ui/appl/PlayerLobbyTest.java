@@ -87,6 +87,8 @@ public class PlayerLobbyTest {
         // Analyze results
 
         assertEquals(lobby.getUser("Gideon"), player1);
+
+        assertEquals(lobby.getUser("NOT REAL"), null);
     }
 
     @Test
