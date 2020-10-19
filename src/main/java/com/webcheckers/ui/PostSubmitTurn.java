@@ -44,12 +44,13 @@ public class PostSubmitTurn implements Route{
 
         System.out.println(evaluator.validateMove(game, M));
         Message message;
-        if (evaluator.validateMove(game, M)!= ValidateMove.Validation.VALID){
-            message = Message.error("nope");
-        }else{
+        if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
             message = Message.info("yeah");
+            game.setRecentMove(M);
             game.doTurn(M);
             game.getBoard().changeActiveColor();
+        }else{
+            message = Message.error(evaluator.validateMove(game, M).toString());
             //response.redirect(WebServer.GAME_URL);
         }
 
