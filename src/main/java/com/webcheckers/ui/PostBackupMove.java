@@ -36,17 +36,16 @@ public class PostBackupMove implements Route{
     public Object handle(Request request, Response response) {
         Player currentUser= request.session().attribute("currentUser");
         Game game = this.gameCenter.getGame(currentUser);;
+        String move = request.queryParams("actionData");
 
         Gson json = new Gson();
-        Move M = game.getMove(game.getNumMoves()-1);
+        Move M = json.fromJson(move, Move.class);
         ValidateMove evaluator = new ValidateMove();
 
         Message message;
         if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
-            message = Message.info("yeah");
-            game.setRecentMove(M);
-            game.doTurn(M);
-            game.getBoard().changeActiveColor();
+            message = Message.info("Move backed up");
+            game.addMove(M);
         }else{
             message = Message.error(evaluator.validateMove(game, M).toString());
         }
