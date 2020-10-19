@@ -29,7 +29,6 @@ public class PostSignOutRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         final String name = request.queryParams("currentUser");
-        System.out.println(name);
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser = request.session().attribute("currentUser");
         ArrayList<Player> names = removeCurrentUser(currentUser, request.session());
@@ -37,7 +36,6 @@ public class PostSignOutRoute implements Route {
         vm.put("currentUser", null);
         vm.put("names", names);
         vm.put("message", WELCOME_MSG);
-        System.out.println("removing " + currentUser.getName() + " from lobby");
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
@@ -51,7 +49,6 @@ public class PostSignOutRoute implements Route {
         this.lobby.removeUser(currentUser);
         session.attribute("names", names);
 
-        System.out.println("lobby=" + this.lobby.getUsers());
         return names;
     }
 

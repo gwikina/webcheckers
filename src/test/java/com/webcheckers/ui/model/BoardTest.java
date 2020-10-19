@@ -1,6 +1,7 @@
 package com.webcheckers.ui.model;
 
 import com.webcheckers.model.Board;
+import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,25 @@ public class BoardTest {
         assertNotNull(board);
     }
 
+    @Test
+    public void testGetWhitePlayer() {
+        // Analyze results
+        assertEquals(testPlayer, board.getRedPlayer());
+    }
+
+    @Test
+    public void testGetRedPlayer() {
+        // Analyze results
+        assertEquals(testPlayer2, board.getWhitePlayer());
+    }
+
+    @Test
+    public void testIsSpaceValid() {
+        // Analyze results
+        assertFalse(board.isSpaceValid(1, 1));
+        assertFalse(board.isSpaceValid(7, 7));
+        assertFalse(board.isSpaceValid(5, 6));
+    }
 
 
 }
