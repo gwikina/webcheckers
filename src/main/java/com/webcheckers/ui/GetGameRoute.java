@@ -22,9 +22,12 @@ public class GetGameRoute implements Route {
 
     private GameCenter gameCenter;
 
-    public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
+    private PlayerLobby lobby;
+
+    public GetGameRoute(TemplateEngine templateEngine, PlayerLobby lobby, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = gameCenter;
+        this.lobby = lobby;
     }
 
     @Override
@@ -34,10 +37,9 @@ public class GetGameRoute implements Route {
 
         if (currentUser!=null) {
             Game game = this.gameCenter.getGame(currentUser);
-            //Player opponent = game.getOpponent(currentUser);
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);
-            // Message MSG = Message.info("Please wait for Heather to play");
+
             vm.put("title", "WebCheckers");
             vm.put("currentUser", currentUser);
             vm.put("gameID", game.getGameID());

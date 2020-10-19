@@ -164,6 +164,7 @@ public class WebServer {
     post(VALIDATE_MOVE, new PostValidateMove(templateEngine, gameCenter));
     post(CHECK_TURN, new PostCheckTurn(templateEngine, gameCenter));
     post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
+    post("/backupMove", new PostBackupMove(templateEngine, gameCenter));
 
     //
     LOG.config("WebServer is initialized.");
