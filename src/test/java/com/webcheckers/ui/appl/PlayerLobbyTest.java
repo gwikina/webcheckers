@@ -170,6 +170,12 @@ public class PlayerLobbyTest {
         expected_players.add(player2);
         // Analyze results
         assertEquals(expected_players, list_of_players);
+
+        lobby.playerChoseInGame();
+        assertEquals(true, lobby.isChoseInGame());
+
+        lobby.notChoseInGame();
+        assertEquals(false, lobby.isChoseInGame());
     }
 
     @Test
