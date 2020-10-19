@@ -27,19 +27,16 @@ public class PostValidateMove implements Route{
         this.gameCenter = gameCenter;
     }
 
+
     @Override
     public Object handle(Request request, Response response) {
-        final Map<String, Object> vm = new HashMap<>();
-
         String move = request.queryParams("actionData");
         Player currentUser= request.session().attribute("currentUser");
-        System.out.println(move);
 
         Gson json = new Gson();
         Move M = json.fromJson(move, Move.class);
         ValidateMove evaluator = new ValidateMove();
         Game game = this.gameCenter.getGame(currentUser);;
-        System.out.println(evaluator.validateMove(game, M));
         Message message = null;
         if (evaluator.validateMove(game, M)== ValidateMove.Validation.TOOFAR){
             message = Message.error("Invalid Move: Please Move a Shorter Distance");
