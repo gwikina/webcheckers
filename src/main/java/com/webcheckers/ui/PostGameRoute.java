@@ -40,7 +40,6 @@ public class PostGameRoute implements Route {
 
         String opponentName = request.queryParams("opponent");
         Player opponent = lobby.getUser(opponentName);
-        System.out.println(opponentName);
         if (!this.lobby.isInGame(opponent)) {
             Game game = this.gameCenter.makeGame(currentUser, opponent);
 

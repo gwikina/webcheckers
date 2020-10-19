@@ -32,17 +32,13 @@ public class PostSubmitTurn implements Route{
 
     @Override
     public Object handle(Request request, Response response) {
-        String move = request.queryParams("actionData");
         Player currentUser= request.session().attribute("currentUser");
         Game game = this.gameCenter.getGame(currentUser);;
 
         Gson json = new Gson();
         Move M = game.getMove(game.getNumMoves()-1);
         ValidateMove evaluator = new ValidateMove();
-        System.out.println("game = " + game + " move = " + M);
 
-
-        System.out.println(evaluator.validateMove(game, M));
         Message message;
         if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
             message = Message.info("yeah");
@@ -51,9 +47,7 @@ public class PostSubmitTurn implements Route{
             game.getBoard().changeActiveColor();
         }else{
             message = Message.error(evaluator.validateMove(game, M).toString());
-            //response.redirect(WebServer.GAME_URL);
         }
-
         return json.toJson(message);
     }
 }

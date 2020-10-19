@@ -26,8 +26,6 @@ public class PostResignGame implements Route{
     @Override
     public Object handle(Request request, Response response) {
         final Map<String, Object> vm = new HashMap<>();
-//        vm.put("title", "Sign in");
-//        vm.put("message", SIGNIN_MSG);
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
 }

@@ -59,6 +59,9 @@ public class WebServer {
   public static final String LOBBY_URL = "lobby";
   public static final String GAME_URL = "game";
   public static final String SIGNOUT_URL = "signout";
+  public static final String SUBMIT_TURN = "/submitTurn";
+  public static final String CHECK_TURN = "/checkTurn";
+  public static final String VALIDATE_MOVE = "/validateMove";
 
 
 
@@ -158,11 +161,9 @@ public class WebServer {
     get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
     get(GAME_URL, new GetGameRoute(templateEngine, gameCenter));
     post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));
-    post("/validateMove", new PostValidateMove(templateEngine, gameCenter));
-    post("/checkTurn", new PostCheckTurn(templateEngine, gameCenter));
-    post("/submitTurn", new PostSubmitTurn(templateEngine, gameCenter));
-
-
+    post(VALIDATE_MOVE, new PostValidateMove(templateEngine, gameCenter));
+    post(CHECK_TURN, new PostCheckTurn(templateEngine, gameCenter));
+    post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
 
     //
     LOG.config("WebServer is initialized.");
