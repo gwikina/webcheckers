@@ -84,7 +84,8 @@ As a Player, I want to win the game by capturing all of my opponent pieces so th
 
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
+> _1. Spectator Mode_
+> _2. Get Help_
 
 
 ## Application Domain
@@ -134,64 +135,66 @@ with the WebCheckers application.
 
 
 ### UI Tier
-> _Provide a summary of the Server-side UI tier of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
+> ####Web Server
+>The Web Server handles all of the routing that our program
+>is responsible for. For example, it handles routes to the home
+>page, the game page, the sign in page, as well as sub-routes
+>within the game page. 
+>
+>One example of this is:
+>GET /home is handled by GetHomeRoute
 
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class structure or object diagrams) with some
-> details such as critical attributes and methods._
-
-> _You must also provide any dynamic models, such as statechart and
-> sequence diagrams, as is relevant to a particular aspect of the design
-> that you are describing.  For example, in WebCheckers you might create
-> a sequence diagram of the `POST /validateMove` HTTP request processing
-> or you might show a statechart diagram if the Game component uses a
-> state machine to manage the game._
-
-> _If a dynamic model, such as a statechart describes a feature that is
-> not mostly in this tier and cuts across multiple tiers, you can
-> consider placing the narrative description of that feature in a
-> separate section for describing significant features. Place this after
-> you describe the design of the three tiers._
-
+#####PostGameRoute
+![The WebCheckers Sequence Diagram](SequenceDiagram.png)
 
 ### Application Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+> The two main classes in our Application Tier are the GameCenter
+> class and the PlayerLobby class. 
+>
+> ####PlayerLobby
+>PlayerLobby is responsible for handling users and how they
+>interact with the game. PlayerLobby provides methods for retrieving
+>users, players, and gamePlayers, as well as adjustments to these
+>groups. 
+>
+>####GameCenter
+>GameCenter is responsible for handling the games in the game center.
+>For example, GameCenter provides methods for making games, adding games
+>to the game center, and modifying the games themselves.
 
 
 ### Model Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+> The Model Tier consists of many unique classes, such as the Board class,
+>the Game class, the Space class, and many more. Each of these classes
+>plays an important role in modeling the web checkers game, and each has
+>unique functionality. 
 
 ### Design Improvements
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements. After completion of the Code metrics exercise, you
-> will also discuss the resutling metric measurements.  Indicate the
-> hot spots the metrics identified in your code base, and your
-> suggested design improvements to address those hot spots._
+>There are several improvements that our team would make if the project
+>were to continue. First, we would better adhere to the principle
+>of encapsulation. Several of our classes poorly implement this principle,
+>which could lead to possible security issues in the future. Another
+>improvement we would make would be to better utilize the idea of polymorphism.
+>There are several opportunities for the user of polymorphism in our code - for example,
+>we could have implemented a Person class, which could then be implemented by
+>a User class, a Player class, and a gamePlayer class.
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
+> We added tests for each of the classes in the Application, Model, 
+>and UI tiers of our system. Overall, all of our tests passed.
+>However, in the future, we plan to add more tests to further ensure
+>the security and stability of our code.
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+> Thus far, five of our user stories have completely passed. These
+>stories include sign in, start a game, capture pieces, take a turn,
+>and undo a move. We are currently in the process of implementing the 
+>resign from game user story, but we plan to finish this story in the near
+>future. 
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+> We used JaCoCo to generate coverage reports of our testing code.
+>Overall, we achieved code coverage of 52%. Our Application tier has
+>100% coverage, whereas our UI tier has 12% coverage. In the future,
+>we plan to add more tests to the UI tier to ensure security and stability
+>of the UI tier code. 
