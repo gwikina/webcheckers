@@ -16,14 +16,11 @@ import spark.TemplateEngine;
 import com.google.gson.*;
 
 public class PostValidateMove implements Route{
-    private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
-    private final TemplateEngine templateEngine;
     private final GameCenter gameCenter;
 
     //private Jas
-    public PostValidateMove(TemplateEngine templateEngine, GameCenter gameCenter) {
-        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+    public PostValidateMove(GameCenter gameCenter) {
         this.gameCenter = gameCenter;
     }
 
