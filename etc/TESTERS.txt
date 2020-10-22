@@ -1,0 +1,18 @@
+Testers:
+0. To compile, use this command: mvn compile exec:java
+0.1: Open a browser and connect to localhost:4567
+1. Press sign in
+2. Enter a username
+3. Try to enter special characters in the username field and sign in.
+4. Try to enter nothing in the username field and sign in.
+5. Sign in with "test".
+6. Sign in in a separate, incognito/private tab.
+7. Start a game with the other user.
+8. Play a game of checkers.
+9. During the game, try to break the rules:
+	1. Can't move more than one piece further.
+	2. Can't move to a white square.
+	3. Can't move somewhere else when you have to take a piece.
+	4. Can't make more than one turn.
+	5. Can't move backwards (unless you are the king).
+10. When all pieces of one player are gone, the game ends. Go back to the home page.
