@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class PostSignInRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
 
-    private static final Message FAILED = Message.info("Sorry, a user with that name already exists, please choose a different name");
+    private static final Message SIGNIN_MSG = Message.info("sign in");
 
     private final TemplateEngine templateEngine;
 
@@ -25,34 +25,29 @@ public class PostSignInRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         final String name = request.queryParams("currentUser");
+        System.out.println(name);
+        Player newPlayer = new Player(name);
+        storeCurrentUser(newPlayer, request.session());
         final Map<String, Object> vm = new HashMap<>();
-
-        if (this.lobby.getUser(name)==null) {
-            Player newPlayer = new Player(name);
-            ArrayList<Player> names = storeCurrentUser(newPlayer, request.session());
-            vm.put("title", "Welcome!");
-            vm.put("currentUser", newPlayer);
-            vm.put("names", names);
-            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
-        }
-        else{
-            vm.put("title", "Welcome!");
-            vm.put("message", FAILED);
-            return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
-        }
+        vm.put("title", "Sign in");
+        vm.put("message", SIGNIN_MSG);
+        vm.put("currentUser", newPlayer);
+        System.out.println(newPlayer.getName());
+        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
-    private ArrayList<Player> storeCurrentUser(Player newPlayer, Session session){
-        ArrayList<Player> names = session.attribute("names");
+    private void storeCurrentUser(Player newPlayer, Session session){
+        session.attribute("currentUser", newPlayer);
+        this.lobby.addGamePlayer(newPlayer);
+        this.lobby.addUser(newPlayer);
+        ArrayList<String> names = session.attribute("names");
         if (names == null) {
-            names = this.lobby.getUsers();
-        }
-        if (!this.lobby.getUsers().contains(newPlayer)) {
-            session.attribute("currentUser", newPlayer);
-            this.lobby.addUser(newPlayer);
+            names = new ArrayList<String>();
             session.attribute("names", names);
+            names.add(newPlayer.name);
         }
-        return names;
+        session.attribute("names", names);
+        System.out.println(names);
     }
 
 }
