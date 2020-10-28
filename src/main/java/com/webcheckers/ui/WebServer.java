@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
-import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import spark.TemplateEngine;
 
@@ -58,12 +57,7 @@ public class WebServer {
   public static final String SIGNIN_URL = "signin";
   public static final String LOBBY_URL = "lobby";
   public static final String GAME_URL = "game";
-  public static final String SIGNOUT_URL = "signout";
-  public static final String SUBMIT_TURN = "/submitTurn";
-  public static final String CHECK_TURN = "/checkTurn";
-  public static final String VALIDATE_MOVE = "/validateMove";
-  public static final String BACKUP_MOVE = "/backupMove";
-  public static final String RESIGN_GAME = "/resignGame";
+
 
 
   //
@@ -73,7 +67,7 @@ public class WebServer {
   private final TemplateEngine templateEngine;
   private final Gson gson;
   private PlayerLobby lobby;
-  private GameCenter gameCenter;
+
   //
   // Constructor
   //
@@ -97,7 +91,6 @@ public class WebServer {
     this.templateEngine = templateEngine;
     this.gson = gson;
     this.lobby = new PlayerLobby();
-    this.gameCenter = new GameCenter();
   }
 
   //
@@ -153,21 +146,13 @@ public class WebServer {
 
     // Shows the Checkers game Home page.
     //PostSignInRoute signIn = new PostSignInRoute(templateEngine, lobby);
-    get(HOME_URL, new GetHomeRoute(templateEngine, lobby));
+    get(HOME_URL, new GetHomeRoute(templateEngine));
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
     post(LOBBY_URL, new PostSignInRoute(templateEngine, lobby));
-    get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));
-    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));
-    get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
-    get(GAME_URL, new GetGameRoute(templateEngine, lobby, gameCenter));
-    post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));
-    post(VALIDATE_MOVE, new PostValidateMove(gameCenter));
-    post(CHECK_TURN, new PostCheckTurn(templateEngine, gameCenter));
-    post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
-    post(BACKUP_MOVE, new PostBackupMove(templateEngine, gameCenter));
-    post(RESIGN_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
+    get(LOBBY_URL, new PostSignInRoute(templateEngine, lobby));
+    get(GAME_URL, new GetGameRoute(templateEngine));
 
-
+    //
     LOG.config("WebServer is initialized.");
   }
 
