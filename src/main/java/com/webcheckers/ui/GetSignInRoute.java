@@ -22,8 +22,9 @@ import static spark.Spark.halt;
  * @author <a href='mailto:jrv@se.rit.edu'>Jim Vallino</a>
  */
 public class GetSignInRoute implements Route {
+    private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
-    private static final Message SIGNIN_MSG = Message.info("Please sign in");
+    private static final Message SIGNIN_MSG = Message.info("sign in");
 
     private final TemplateEngine templateEngine;
 
