@@ -61,7 +61,7 @@ public class PostGameRoute implements Route {
             return templateEngine.render(new ModelAndView(vm, "game.ftl"));
         }   else{
             response.redirect(WebServer.HOME_URL);
-            return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+            return null;
         }
     }
 

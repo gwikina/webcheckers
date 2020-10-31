@@ -64,6 +64,7 @@ public class WebServer {
   public static final String VALIDATE_MOVE = "/validateMove";
   public static final String BACKUP_MOVE = "/backupMove";
   public static final String RESIGN_GAME = "/resignGame";
+  public static final String EXIT_GAME = "/exit";
 
 
   //
@@ -166,6 +167,7 @@ public class WebServer {
     post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
     post(BACKUP_MOVE, new PostBackupMove(templateEngine, gameCenter));
     post(RESIGN_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
+    //post(EXIT_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
 
 
     LOG.config("WebServer is initialized.");

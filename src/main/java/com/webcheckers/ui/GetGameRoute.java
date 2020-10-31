@@ -36,7 +36,7 @@ public class GetGameRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser= request.session().attribute("currentUser");
 
-        if (currentUser!=null) {
+        if (currentUser!=null && this.gameCenter.getGame(currentUser)!=null) {
             Game game = this.gameCenter.getGame(currentUser);
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);
@@ -55,6 +55,8 @@ public class GetGameRoute implements Route {
                 Gson json = new Gson();
                 final Map<String, Object> modeOptions = new HashMap<>(2);
                 modeOptions.put("isGameOver", true);
+                this.lobby.removeGamePlayer(currentUser);
+                this.gameCenter.addGameOver(game);
 
                 if (game.getResignPlayer()!=null){
                    if (currentUser==game.getResignPlayer()) {
@@ -94,9 +96,14 @@ public class GetGameRoute implements Route {
                 }
             }
         }
-        else{
+        else if (this.gameCenter.getGame(currentUser)==null){
+            this.lobby.removeGamePlayer(currentUser);
             response.redirect(WebServer.HOME_URL);
-            return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+            return null;
+        }
+        else{
+            //response.redirect(WebServer.HOME_URL);
+            return templateEngine.render(new ModelAndView(vm, "game.ftl")); //404
         }
     }
 

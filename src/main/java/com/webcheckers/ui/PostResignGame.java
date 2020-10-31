@@ -34,7 +34,6 @@ public class PostResignGame implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        final Map<String, Object> vm = new HashMap<>();
         Player currentUser = request.session().attribute("currentUser");
         Game game = this.gameCenter.getGame(currentUser);
         Gson json = new Gson();
@@ -47,11 +46,12 @@ public class PostResignGame implements Route {
             game.setWinner(game.getOpponent(currentUser));
             message = Message.info("Resigned Successfully");
         }
-        //TODO winner page and/or lobby
-        //templateEngine.render(new ModelAndView(vm, "lobby.ftl"));
+
         System.out.println("Winner is: " + game.getWinner().getName());
         System.out.println("Loser is: " + game.getResignPlayer().getName());
         //TODO: Fix error where this does not allow a new game to start
+        //this.lobby.removeGamePlayer(currentUser); in GetGameRoute
+
         return json.toJson(message);
     }
 }
