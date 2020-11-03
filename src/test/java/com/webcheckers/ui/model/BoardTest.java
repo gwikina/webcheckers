@@ -50,6 +50,8 @@ public class BoardTest {
         //Analyze results after changing active color
         board.changeActiveColor();
         assertEquals(Piece.Color.WHITE, board.getActiveColor());
+        board.changeActiveColor();
+        assertEquals(Piece.Color.RED, board.getActiveColor());
     }
 
 
