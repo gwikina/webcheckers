@@ -67,5 +67,18 @@ public class BoardTest {
         }
     }
 
-
+    @Test
+    public void testNoPieces() {
+        //Analyze results of initial active color
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (board.getPiece(r, c) != null) {
+                    Piece piece = board.getPiece(r, c);
+                    board.decrementPieces(piece);
+                    board.removePiece(r, c);
+                }
+            }
+        }
+        assertTrue(board.noPieces());
+    }
 }
