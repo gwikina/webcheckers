@@ -27,8 +27,8 @@ public class PlayerLobby {
     }
 
 
-    public static boolean addUser(Player player){
-        if(!users.contains(player) && player != null){
+    public static boolean addUser(Player player) {
+        if (!users.contains(player) && player != null) {
             users.add(player);
             return true;
         }
@@ -36,14 +36,14 @@ public class PlayerLobby {
     }
 
 
-    public static void addPlayer(Player player){
-        if(!players.contains(player) && player != null){
+    public static void addPlayer(Player player) {
+        if (!players.contains(player) && player != null) {
             players.add(player);
         }
     }
 
-    public void addGamePlayer(Player player){
-        if(!gamePlayers.contains(player) && player != null){
+    public void addGamePlayer(Player player) {
+        if (!gamePlayers.contains(player) && player != null) {
             gamePlayers.add(player);
         }
     }
@@ -64,16 +64,16 @@ public class PlayerLobby {
     }
 
 
-    public static Player[] playerArray(ArrayList<Player> playerList){
+    public static Player[] playerArray(ArrayList<Player> playerList) {
         Player[] playerNames = new Player[playerList.size()];
-        for(int i = 0; i < playerList.size(); i++){
+        for (int i = 0; i < playerList.size(); i++) {
             playerNames[i] = playerList.get(i);
         }
         return playerNames;
     }
 
 
-    public Player getUser(String name){
+    public Player getUser(String name) {
         Player[] playerArray = this.playerArray(this.users);
         for (Player player : playerArray) {
             if (player.getName().equals(name)) {
@@ -83,22 +83,31 @@ public class PlayerLobby {
         return null;
     }
 
-    public boolean isInGame(Player player){ return gamePlayers.contains(player); }
+    public boolean isInGame(Player player) {
+        return gamePlayers.contains(player);
+    }
 
-    public void removeUser(Player player){ users.remove(player); }
+    public void removeUser(Player player) {
+        users.remove(player);
+    }
 
-    public void removePlayer(Player player){ players.remove(player); }
+    public void removePlayer(Player player) {
+        players.remove(player);
+    }
 
-    public void removeGamePlayer(Player player){ gamePlayers.remove(player); }
+    public void removeGamePlayer(Player player) {
+        gamePlayers.remove(player);
+    }
 
-    public void playerChoseInGame(){
+    public void playerChoseInGame() {
         choseInGame = true;
     }
 
-    public void notChoseInGame(){
+    public void notChoseInGame() {
         choseInGame = false;
     }
 
-    public boolean isChoseInGame(){
+    public boolean isChoseInGame() {
         return choseInGame;
     }
+}
