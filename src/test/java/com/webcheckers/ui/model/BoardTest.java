@@ -43,5 +43,14 @@ public class BoardTest {
         assertFalse(board.isSpaceValid(5, 6));
     }
 
+    @Test
+    public void testActiveColor() {
+        //Analyze results of initial active color
+        assertEquals(Piece.Color.RED, board.getActiveColor());
+        //Analyze results after changing active color
+        board.changeActiveColor();
+        assertEquals(Piece.Color.WHITE, board.getActiveColor());
+    }
+
 
 }

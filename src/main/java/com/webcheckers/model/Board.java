@@ -171,7 +171,7 @@ public class Board {
     }
 
     /**
-     * Changes thee active color
+     * Changes the active color
      */
     public void changeActiveColor(){
         this.activeColor = (this.activeColor == Piece.Color.RED) ? Piece.Color.WHITE :Piece.Color.RED;
