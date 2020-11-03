@@ -3,6 +3,7 @@ package com.webcheckers.ui.model;
 import com.webcheckers.model.Board;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
+import com.webcheckers.model.Space;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +53,18 @@ public class BoardTest {
         assertEquals(Piece.Color.WHITE, board.getActiveColor());
         board.changeActiveColor();
         assertEquals(Piece.Color.RED, board.getActiveColor());
+    }
+
+    @Test
+    public void testAllValidSpaces() {
+        //Analyze results of initial active color
+        board.allValidSpaces();
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                Space space = board.getSpace(r, c);
+                assertTrue(space.isValid());
+            }
+        }
     }
 
 
