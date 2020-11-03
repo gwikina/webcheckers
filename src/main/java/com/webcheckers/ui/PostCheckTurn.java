@@ -28,16 +28,22 @@ public class PostCheckTurn implements Route{
         Player currentUser= request.session().attribute("currentUser");
 
         Game game = gameCenter.getGame(currentUser);
+        Message message;
+
+
+        if (game != null) {
         Player redPlayer = game.getRedPlayer();
         Player whitePlayer = game.getWhitePlayer();
 
-        Message message;
-
-        if (currentUser == redPlayer && game.getBoard().getActiveColor() == Piece.Color.RED ) {
-            message = Message.info("true");
-        }else if (currentUser == whitePlayer && game.getBoard().getActiveColor() == Piece.Color.WHITE ){
-            message = Message.info("true");
-        }else {
+            if (currentUser == redPlayer && game.getBoard().getActiveColor() == Piece.Color.RED && !game.isGameOver()) {
+                message = Message.info("true");
+            } else if (currentUser == whitePlayer && game.getBoard().getActiveColor() == Piece.Color.WHITE && !game.isGameOver()) {
+                message = Message.info("true");
+            } else {
+                message = Message.info("false");
+            }
+        }
+        else {
             message = Message.info("false");
         }
 
