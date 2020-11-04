@@ -1,8 +1,6 @@
 package com.webcheckers.ui.model;
 
-import com.webcheckers.model.Board;
-import com.webcheckers.model.Piece;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +41,52 @@ public class BoardTest {
         assertFalse(board.isSpaceValid(5, 6));
     }
 
+    @Test
+    public void testActiveColor() {
+        //Analyze results of initial active color
+        assertEquals(Piece.Color.RED, board.getActiveColor());
+        //Analyze results after changing active color
+        board.changeActiveColor();
+        assertEquals(Piece.Color.WHITE, board.getActiveColor());
+        board.changeActiveColor();
+        assertEquals(Piece.Color.RED, board.getActiveColor());
+    }
 
+    @Test
+    public void testAllValidSpaces() {
+        //Analyze results of initial active color
+        board.allValidSpaces();
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                Space space = board.getSpace(r, c);
+                assertTrue(space.isValid());
+            }
+        }
+    }
+
+    @Test
+    public void testNoPieces() {
+        //Analyze results of initial active color
+        assertFalse(board.noPieces());
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (board.getPiece(r, c) != null) {
+                    Piece piece = board.getPiece(r, c);
+                    board.decrementPieces(piece);
+                    board.removePiece(r, c);
+                }
+            }
+        }
+        assertTrue(board.noPieces());
+    }
+
+    @Test
+    public void testUpdateBoard() {
+        Position start1 = new Position(0, 0);
+        Position end1 = new Position(1, 1);
+        Move move1 = new Move(start1, end1);
+        board.updateBoard(move1);
+        Piece piece1 = board.getPiece(1, 1);
+        assertEquals(board.getPiece(1, 1), piece1);
+    }
 }

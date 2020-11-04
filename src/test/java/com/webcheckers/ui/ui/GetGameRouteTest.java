@@ -58,31 +58,6 @@ public class GetGameRouteTest {
         CuT = new GetGameRoute(engine, playerLobby, gameCenter );
     }
 
-    /**
-     * Test that the Game view will create a new game if none exists.
-     */
-    @Test
-    public void new_game() {
-        // Arrange the test scenario: The session holds no game.
-
-        // To analyze what the Route created in the View-Model map you need
-        // to be able to extract the argument to the TemplateEngine.render method.
-        // Mock up the 'render' method by supplying a Mockito 'Answer' object
-        // that captures the ModelAndView data passed to the template engine
-        final TemplateEngineTester testHelper = new TemplateEngineTester();
-        when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-
-        // Invoke the test (ignore the output)
-        CuT.handle(request, response);
-
-        // Analyze the content passed into the render method
-        //   * model is a non-null Map
-        testHelper.assertViewModelExists();
-        testHelper.assertViewModelIsaMap();
-        //verify(response).redirect(WebServer.HOME_URL);
-
-    }
-
 
 
 }
