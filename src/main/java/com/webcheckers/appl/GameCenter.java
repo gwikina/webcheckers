@@ -1,4 +1,4 @@
-/**
+/*
  * file: GameCenter.java
  * @description: Functionality for storing data for active games and finished games.
  * @author: Team
