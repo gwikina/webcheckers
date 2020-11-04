@@ -167,6 +167,8 @@ public class WebServer {
     post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
     post(BACKUP_MOVE, new PostBackupMove(templateEngine, gameCenter));
     post(RESIGN_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
+    get("spectator/stopWatching", new PostExitSpectate(templateEngine, gameCenter, lobby));
+
     //post(EXIT_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
 
 

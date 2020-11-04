@@ -8,11 +8,7 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.TemplateEngine;
+import spark.*;
 
 import com.webcheckers.util.Message;
 
@@ -64,14 +60,25 @@ public class GetHomeRoute implements Route {
       if (this.lobby.isInGame(currentUser)){
         response.redirect(WebServer.GAME_URL);
       }
-
+      PlayerLobby playerLobby = storeLobby(this.lobby, request.session());
       vm.remove("message");
       vm.put("currentUser", currentUser);
       vm.put("names", names);
-    }
+      vm.put("lobby", playerLobby);
 
+    }
 
     // render the View
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+  }
+
+  private PlayerLobby storeLobby(PlayerLobby LOBBY, Session session){
+    PlayerLobby playerLobby  = session.attribute("lobby");
+    if (playerLobby == null) {
+      playerLobby = LOBBY; //TODO might not update, if so --> remove if
+    }
+      session.attribute("lobby", playerLobby);
+
+    return playerLobby;
   }
 }

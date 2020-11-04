@@ -35,8 +35,43 @@ public class GetGameRoute implements Route {
     public Object handle(Request request, Response response) {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser= request.session().attribute("currentUser");
+        Player spectatedGamePlayer = request.session().attribute("spectatedGamePlayer");
 
-        if (currentUser!=null && this.gameCenter.getGame(currentUser)!=null) {
+        if (spectatedGamePlayer != null){
+            Game game = this.gameCenter.getGame(spectatedGamePlayer);
+            if (!game.isGameOver()) {
+                Board board = game.getBoard();
+                BoardView boardView = new BoardView(board, spectatedGamePlayer);
+                vm.put("currentUser", currentUser);
+
+                vm.put("title", "WebCheckers");
+                vm.put("gameID", game.getGameID());
+                vm.put("viewMode", "SPECTATOR");
+                vm.put("redPlayer", game.getRedPlayer());
+                vm.put("whitePlayer", game.getWhitePlayer());
+                vm.put("activeColor", board.getActiveColor());
+                vm.put("board", boardView);
+                return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+            }
+            else{
+                final Map<String, Object> modeOptions = new HashMap<>(2);
+                modeOptions.put("isGameOver", true);
+                Board board = game.getBoard();
+                BoardView boardView = new BoardView(board, spectatedGamePlayer);
+                vm.put("currentUser", currentUser);
+
+                vm.put("title", "WebCheckers");
+                vm.put("gameID", game.getGameID());
+                vm.put("viewMode", "SPECTATOR");
+                vm.put("redPlayer", game.getRedPlayer());
+                vm.put("whitePlayer", game.getWhitePlayer());
+                vm.put("activeColor", board.getActiveColor());
+                vm.put("board", boardView);
+                return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+            }
+        }
+
+        else if (currentUser!=null && this.gameCenter.getGame(currentUser)!=null) {
             Game game = this.gameCenter.getGame(currentUser);
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);
@@ -55,9 +90,10 @@ public class GetGameRoute implements Route {
                 Gson json = new Gson();
                 final Map<String, Object> modeOptions = new HashMap<>(2);
                 modeOptions.put("isGameOver", true);
-                this.lobby.removeGamePlayer(currentUser);
                 this.gameCenter.addGameOver(game);
+                this.lobby.removeGamePlayer(currentUser);
 
+                //Player resigned game ending
                 if (game.getResignPlayer()!=null){
                    if (currentUser==game.getResignPlayer()) {
                     modeOptions.put("gameOverMessage", "Resigned Successfully, Exit when ready");
@@ -76,6 +112,7 @@ public class GetGameRoute implements Route {
                     vm.put("board", boardView);
                     return templateEngine.render(new ModelAndView(vm, "game.ftl"));
                 }
+                //Normal game end
                 else {
                     if (currentUser==game.getWinner()) {
                         modeOptions.put("gameOverMessage", "Congrats You won by capturing all pieces! Exit when ready");
@@ -96,6 +133,7 @@ public class GetGameRoute implements Route {
                 }
             }
         }
+
         else if (this.gameCenter.getGame(currentUser)==null){
             this.lobby.removeGamePlayer(currentUser);
             response.redirect(WebServer.HOME_URL);

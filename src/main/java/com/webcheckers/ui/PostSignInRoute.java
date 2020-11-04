@@ -30,10 +30,8 @@ public class PostSignInRoute implements Route {
         if (this.lobby.getUser(name)==null) {
             Player newPlayer = new Player(name);
             ArrayList<Player> names = storeCurrentUser(newPlayer, request.session());
-            vm.put("title", "Welcome!");
-            vm.put("currentUser", newPlayer);
-            vm.put("names", names);
-            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+            response.redirect(WebServer.HOME_URL);
+            return null;
         }
         else{
             vm.put("title", "Welcome!");

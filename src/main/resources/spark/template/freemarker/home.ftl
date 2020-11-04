@@ -26,13 +26,22 @@
       <#if names??>
           <ul>
           <#list names as user>
-          <#if user!=currentUser>
+          <#if user!=currentUser && !(lobby.getGamePlayers()?seq_contains(user)) && !(lobby.getPlayers()?seq_contains(user))>
           <form action="game" method="Post">
             <li>${user.name}
                 <button type="submit">start game with player ${user.name}</button>
                 <input type="text" style="display:none" name="opponent" value="${user.name}"/>
             </li>
           </form>
+          <#elseif user!=currentUser && lobby.getGamePlayers()?seq_contains(user) && !lobby.getPlayers()?seq_contains(user)>
+          <form action="game" method="Post">
+                      <li>${user.name}
+                          <button type="submit">spectate game with player ${user.name}</button>
+                          <input type="text" style="display:none" name="spectatedPlayer" value="${user.name}"/>
+                      </li>
+          </form>
+          <#elseif user!=currentUser && lobby.getPlayers()?seq_contains(user)>
+                (spectating game)
             <#else>
             <li>${user.name}</li>
            </#if>
