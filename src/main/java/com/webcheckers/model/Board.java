@@ -49,7 +49,6 @@ public class Board {
                     boardArray[r][c] = new Space(c, true);
                     if(r<3) {
                         addPiece(r, c, new Piece(Piece.Type.SINGLE, Piece.Color.WHITE));
-                        //System.out.println(boardArray[r][c].getPiece().toString());
                     }
                     else if(r>4)
                         addPiece(r,c,new Piece(Piece.Type.SINGLE, Piece.Color.RED));
@@ -172,7 +171,7 @@ public class Board {
     }
 
     /**
-     * Changes thee active color
+     * Changes the active color
      */
     public void changeActiveColor(){
         this.activeColor = (this.activeColor == Piece.Color.RED) ? Piece.Color.WHITE :Piece.Color.RED;

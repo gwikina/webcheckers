@@ -36,6 +36,7 @@ public class AI {
         }
         System.out.println("Possible Moves: " + possibleMoves.size());
         Random random = new Random();
+        random.setSeed(5);
         if (possibleMoves.size() > 0) { //if no possible moves return null
             int index = random.nextInt(possibleMoves.size());
             return possibleMoves.get(index); //cpu performs a random move from legal moves

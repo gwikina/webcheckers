@@ -25,7 +25,6 @@ public class PostSignInRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         final String name = request.queryParams("currentUser");
-        System.out.println(name);
         final Map<String, Object> vm = new HashMap<>();
 
         if (this.lobby.getUser(name)==null) {
@@ -34,7 +33,6 @@ public class PostSignInRoute implements Route {
             vm.put("title", "Welcome!");
             vm.put("currentUser", newPlayer);
             vm.put("names", names);
-            System.out.println(newPlayer.getName());
             return templateEngine.render(new ModelAndView(vm, "home.ftl"));
         }
         else{
@@ -54,7 +52,6 @@ public class PostSignInRoute implements Route {
             this.lobby.addUser(newPlayer);
             session.attribute("names", names);
         }
-        System.out.println("lobby=" + this.lobby.getUsers());
         return names;
     }
 

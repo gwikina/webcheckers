@@ -96,7 +96,7 @@ public class Game {
 
 
     public boolean isGameOver(){
-        return this.board.noPieces();
+        return this.board.noPieces() | this.resignPlayer!=null;
     }
 
 

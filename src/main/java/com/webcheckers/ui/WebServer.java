@@ -59,8 +59,12 @@ public class WebServer {
   public static final String LOBBY_URL = "lobby";
   public static final String GAME_URL = "game";
   public static final String SIGNOUT_URL = "signout";
-
-
+  public static final String SUBMIT_TURN = "/submitTurn";
+  public static final String CHECK_TURN = "/checkTurn";
+  public static final String VALIDATE_MOVE = "/validateMove";
+  public static final String BACKUP_MOVE = "/backupMove";
+  public static final String RESIGN_GAME = "/resignGame";
+  public static final String EXIT_GAME = "/exit";
 
 
   //
@@ -156,12 +160,16 @@ public class WebServer {
     get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));
     post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));
     get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
-    get(GAME_URL, new GetGameRoute(templateEngine, gameCenter));
+    get(GAME_URL, new GetGameRoute(templateEngine, lobby, gameCenter));
     post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));
-    post("/validateMove", new PostValidateMove(templateEngine, gameCenter));
+    post(VALIDATE_MOVE, new PostValidateMove(gameCenter));
+    post(CHECK_TURN, new PostCheckTurn(templateEngine, gameCenter));
+    post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
+    post(BACKUP_MOVE, new PostBackupMove(templateEngine, gameCenter));
+    post(RESIGN_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
+    //post(EXIT_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
 
 
-    //
     LOG.config("WebServer is initialized.");
   }
 

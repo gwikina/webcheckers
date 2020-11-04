@@ -2,13 +2,14 @@ package com.webcheckers.ui.appl;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@Tag("Application-tier")
 public class PlayerLobbyTest {
     @Test
     public void testPlayerLobby() {
@@ -86,6 +87,8 @@ public class PlayerLobbyTest {
         // Analyze results
 
         assertEquals(lobby.getUser("Gideon"), player1);
+
+        assertEquals(lobby.getUser("NOT REAL"), null);
     }
 
     @Test
@@ -169,6 +172,12 @@ public class PlayerLobbyTest {
         expected_players.add(player2);
         // Analyze results
         assertEquals(expected_players, list_of_players);
+
+        lobby.playerChoseInGame();
+        assertEquals(true, lobby.isChoseInGame());
+
+        lobby.notChoseInGame();
+        assertEquals(false, lobby.isChoseInGame());
     }
 
     @Test
