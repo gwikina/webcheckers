@@ -35,43 +35,8 @@ public class GetGameRoute implements Route {
     public Object handle(Request request, Response response) {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser= request.session().attribute("currentUser");
-        Player spectatedGamePlayer = request.session().attribute("spectatedGamePlayer");
 
-        if (spectatedGamePlayer != null){
-            Game game = this.gameCenter.getGame(spectatedGamePlayer);
-            if (!game.isGameOver()) {
-                Board board = game.getBoard();
-                BoardView boardView = new BoardView(board, spectatedGamePlayer);
-                vm.put("currentUser", currentUser);
-
-                vm.put("title", "WebCheckers");
-                vm.put("gameID", game.getGameID());
-                vm.put("viewMode", "SPECTATOR");
-                vm.put("redPlayer", game.getRedPlayer());
-                vm.put("whitePlayer", game.getWhitePlayer());
-                vm.put("activeColor", board.getActiveColor());
-                vm.put("board", boardView);
-                return templateEngine.render(new ModelAndView(vm, "game.ftl"));
-            }
-            else{
-                final Map<String, Object> modeOptions = new HashMap<>(2);
-                modeOptions.put("isGameOver", true);
-                Board board = game.getBoard();
-                BoardView boardView = new BoardView(board, spectatedGamePlayer);
-                vm.put("currentUser", currentUser);
-
-                vm.put("title", "WebCheckers");
-                vm.put("gameID", game.getGameID());
-                vm.put("viewMode", "SPECTATOR");
-                vm.put("redPlayer", game.getRedPlayer());
-                vm.put("whitePlayer", game.getWhitePlayer());
-                vm.put("activeColor", board.getActiveColor());
-                vm.put("board", boardView);
-                return templateEngine.render(new ModelAndView(vm, "game.ftl"));
-            }
-        }
-
-        else if (currentUser!=null && this.gameCenter.getGame(currentUser)!=null) {
+        if (currentUser!=null && this.gameCenter.getGame(currentUser)!=null) {
             Game game = this.gameCenter.getGame(currentUser);
             Board board = game.getBoard();
             BoardView boardView = new BoardView(board, currentUser);

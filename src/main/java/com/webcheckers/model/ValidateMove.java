@@ -87,8 +87,8 @@ public class ValidateMove {
 
     private static Validation validateJumpMove(Game game, Space start, Move move) {
 
-        if (checkSimpleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())
-        || checkDoubleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType()) {
+        if (checkSimpleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())){
+        //|| checkDoubleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType()) {
 
             return Validation.VALIDJUMP;
         } else

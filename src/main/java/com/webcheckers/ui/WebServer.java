@@ -66,7 +66,9 @@ public class WebServer {
   public static final String BACKUP_MOVE = "/backupMove";
   public static final String RESIGN_GAME = "/resignGame";
   public static final String EXIT_GAME = "/exit";
-
+  public static final String SPEPECTATORCHECK ="/spectator/checkTurn";
+  public static final String SPEPECTATORGAME ="/spectator/game";
+  public static final String SPEPECTATOREXIT ="/spectator/stopWatching";
   //Initializes the Games PlayerLobby.
   public static PlayerLobby PLAYER_LOBBY = new PlayerLobby();
 
@@ -174,9 +176,12 @@ public class WebServer {
     post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
     post(BACKUP_MOVE, new PostBackupMove(templateEngine, gameCenter));
     post(RESIGN_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
-    get("spectator/stopWatching", new PostExitSpectate(templateEngine, gameCenter, lobby));
+    get(SPEPECTATORGAME, new GetSpectateGame(templateEngine, gameCenter));
+    get(SPEPECTATOREXIT, new PostExitSpectate(templateEngine, gameCenter, lobby));
+    post(SPEPECTATORCHECK, new PostCheckSpectate(templateEngine, gameCenter, lobby));
 
-    //post(EXIT_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
+
+    post(EXIT_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
 
 
     LOG.config("WebServer is initialized.");
