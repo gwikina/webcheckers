@@ -27,5 +27,9 @@ public class BoardViewTest {
         assertNotNull(boardview2);
     }
 
-
+    @Test
+    public void testIterator() {
+        assertNotNull(boardview1.iterator());
+        assertNotNull(boardview2.iterator());
+    }
 }
