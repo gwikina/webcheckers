@@ -14,7 +14,8 @@ public class BoardViewTest {
     Player redPlayer = new Player("RED");
     Player whitePlayer = new Player("WHITE");
     Board board = new Board(redPlayer, whitePlayer);
-    BoardView boardview = new BoardView(board, redPlayer);
+    BoardView boardview1 = new BoardView(board, redPlayer);
+    BoardView boardview2 = new BoardView(board, whitePlayer);
 
     /**
      * Test the creation of a new BoardView.
@@ -22,7 +23,8 @@ public class BoardViewTest {
     @Test
     public void testCreateBoardView() {
         // Analyze results
-        assertNotNull(boardview);
+        assertNotNull(boardview1);
+        assertNotNull(boardview2);
     }
 
 
