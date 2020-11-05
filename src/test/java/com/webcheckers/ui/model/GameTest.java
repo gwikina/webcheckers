@@ -106,4 +106,9 @@ public class GameTest {
         assertEquals(game.getOpponent(redPlayer), whitePlayer);
         assertEquals(game.getOpponent(whitePlayer), redPlayer);
     }
+
+    @Test
+    public void testIsGameOver() {
+        assertFalse(game.isGameOver());
+    }
 }
