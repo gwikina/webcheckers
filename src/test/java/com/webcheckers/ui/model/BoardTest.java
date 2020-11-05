@@ -88,5 +88,7 @@ public class BoardTest {
         board.updateBoard(move1);
         Piece piece1 = board.getPiece(1, 1);
         assertEquals(board.getPiece(1, 1), piece1);
+        board.undoMove(move1);
+        assertEquals(board.getPiece(0, 0), piece1);
     }
 }
