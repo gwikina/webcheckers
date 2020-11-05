@@ -100,4 +100,10 @@ public class GameTest {
         game.addMove(move);
         assertEquals(move, game.getMove(0));
     }
+
+    @Test
+    public void testGetOpponent() {
+        assertEquals(game.getOpponent(redPlayer), whitePlayer);
+        assertEquals(game.getOpponent(whitePlayer), redPlayer);
+    }
 }
