@@ -17,6 +17,7 @@ import com.webcheckers.model.Player;
 public class PlayerTest {
     Player testPlayer = new Player("Emily");
     Player testPlayer2 = new Player("Emily");
+    Player testPlayer3 = new Player("TEST");
 
     /**
      * Test the creation of a new Player.
@@ -47,6 +48,7 @@ public class PlayerTest {
         assertFalse(position.equals(testPlayer2));
         assertFalse(board.equals(testPlayer));
         assertTrue(testPlayer2.equals(testPlayer));
+        assertFalse(testPlayer3.equals(testPlayer));
     }
 
 }
