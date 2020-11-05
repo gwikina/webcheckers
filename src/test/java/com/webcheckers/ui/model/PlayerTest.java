@@ -46,6 +46,7 @@ public class PlayerTest {
         assertTrue(testPlayer.equals(testPlayer2));
         assertFalse(position.equals(testPlayer2));
         assertFalse(board.equals(testPlayer));
+        assertTrue(testPlayer2.equals(testPlayer));
     }
 
 }
