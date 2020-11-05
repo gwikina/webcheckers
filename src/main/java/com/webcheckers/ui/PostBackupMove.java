@@ -43,11 +43,11 @@ public class PostBackupMove implements Route{
 
         if (lastMove!=null) {
             message = Message.info("Success! Backed up");
-            game.getBoard().undoMove(lastMove);
+            //game.getBoard().undoMove(lastMove);
         }
         else{
             message = Message.info("Success! Backed up");
-            game.getBoard().undoMove(game.getMove(0));
+            //game.getBoard().undoMove(game.getMove(0));
         }
 
 

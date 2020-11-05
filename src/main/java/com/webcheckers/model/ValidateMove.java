@@ -28,8 +28,6 @@ public class ValidateMove {
 
         int rowChange = Math.abs(startPos.getRow() - endPos.getRow());
 
-        if (rowChange > 2)
-            return Validation.TOOFAR;
 
         //simple move
         if (rowChange == 1) {
@@ -42,11 +40,12 @@ public class ValidateMove {
         }
 
         //jump move
-        if (rowChange == 2) {
+        if (rowChange == 2 || rowChange == 4) {
 
             return validateJumpMove(game, start, move);
         }
 
+        if (rowChange > 2){ return Validation.TOOFAR; }
 
         return Validation.TOOFAR;
 
@@ -88,7 +87,8 @@ public class ValidateMove {
 
     private static Validation validateJumpMove(Game game, Space start, Move move) {
 
-        if (checkSimpleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())) {
+        if (checkSimpleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())
+        || checkDoubleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType()) {
 
             return Validation.VALIDJUMP;
         } else

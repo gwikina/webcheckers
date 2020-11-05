@@ -45,6 +45,7 @@ public class PostValidateMove implements Route{
             message = Message.info("This is a valid Jump");
         } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.VALID) {
             message = Message.info("Valid Move");
+            game.setRecentMove(M);
         }
         game.addMove(M);
 
