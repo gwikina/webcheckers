@@ -11,24 +11,36 @@ import java.util.Objects;
 
 public class GetSpectateGame implements Route {
     private final TemplateEngine templateEngine;
+    private final PlayerLobby lobby;
 
     private GameCenter gameCenter;
 
 
-    public GetSpectateGame(TemplateEngine templateEngine, GameCenter gameCenter) {
+    public GetSpectateGame(TemplateEngine templateEngine, GameCenter gameCenter, PlayerLobby lobby) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = gameCenter;
+        this.lobby = lobby;
     }
 
     @Override
     public Object handle(Request request, Response response) {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser = request.session().attribute("currentUser");
+        String spectatedPLayer = request.queryParams("spectatedPlayer");
+
         String gameID = request.queryParams("gameID");
         System.out.println("gameId is " + gameID);
-        Game game = this.gameCenter.getGame(Integer.getInteger(gameID));
-        Board board = game.getBoard();
+        Game game;
+        Board board;
         BoardView boardView;
+
+        if (gameID!=null) {
+            game = this.gameCenter.getGame(Integer.getInteger(gameID));
+        }else{
+            game = this.gameCenter.getGame(this.lobby.getUser(spectatedPLayer));
+        }
+
+        board = game.getBoard();
         if (board.getActiveColor() == Piece.Color.RED) {
             boardView = new BoardView(board, game.getRedPlayer());
         }else{

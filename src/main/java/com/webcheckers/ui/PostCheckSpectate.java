@@ -13,25 +13,34 @@ import java.util.Objects;
 
 public class PostCheckSpectate implements Route {
     private final TemplateEngine templateEngine;
+    private final PlayerLobby lobby;
 
     private GameCenter gameCenter;
 
     public PostCheckSpectate(TemplateEngine templateEngine, GameCenter gameCenter, PlayerLobby lobby) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = gameCenter;
+        this.lobby = lobby;
     }
 
     public Object handle(Request request, Response response) {
 
         String gameID = request.queryParams("gameID");
-        System.out.println("gameId is " + gameID);
-        Game game = this.gameCenter.getGame(Integer.getInteger(gameID));
+        String spectatedPLayer = request.queryParams("spectatedPlayer");
+        System.out.println("check gameId is " + gameID);
+        Game game;
+
+            System.out.println("checkif gameId is " + gameID);
+            System.out.println("checkif gameId is " + Integer.parseInt(gameID));
+            game = this.gameCenter.getGame(Integer.parseInt(gameID)-1);
+
+
         Player currentUser= request.session().attribute("currentUser");
         Message message;
 
-            Player redPlayer = game.getRedPlayer();
-            Player whitePlayer = game.getWhitePlayer();
-
+            //Player redPlayer = game.getRedPlayer();
+            //Player whitePlayer = game.getWhitePlayer();
+        System.out.println(game);
             if (!game.isGameOver()) {
                 message = Message.info("true");
             } else{

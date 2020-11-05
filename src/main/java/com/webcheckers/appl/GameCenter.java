@@ -84,7 +84,7 @@ public class GameCenter {
      */
     public Game getGame(int gameID){
         //For each game withing List GamesOver
-        for(Game game : gamesOver){
+        for(Game game : activeGames.values()){
             if(game.getGameID() == gameID){
                 return game;
             }

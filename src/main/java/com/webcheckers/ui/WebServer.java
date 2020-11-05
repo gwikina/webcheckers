@@ -176,7 +176,8 @@ public class WebServer {
     post(SUBMIT_TURN, new PostSubmitTurn(templateEngine, gameCenter));
     post(BACKUP_MOVE, new PostBackupMove(templateEngine, gameCenter));
     post(RESIGN_GAME, new PostResignGame(templateEngine, gameCenter, lobby));
-    get(SPEPECTATORGAME, new GetSpectateGame(templateEngine, gameCenter));
+    get(SPEPECTATORGAME, new GetSpectateGame(templateEngine, gameCenter,lobby));
+    post(SPEPECTATORGAME, new GetSpectateGame(templateEngine, gameCenter, lobby));
     get(SPEPECTATOREXIT, new PostExitSpectate(templateEngine, gameCenter, lobby));
     post(SPEPECTATORCHECK, new PostCheckSpectate(templateEngine, gameCenter, lobby));
 

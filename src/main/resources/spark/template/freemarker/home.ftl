@@ -34,7 +34,7 @@
             </li>
           </form>
           <#elseif user!=currentUser && lobby.getGamePlayers()?seq_contains(user) && !lobby.getPlayers()?seq_contains(user)>
-          <form action="game" method="Post">
+          <form action="/spectator/game" method="post">
                       <li>${user.name}
                           <button type="submit">spectate game with player ${user.name}</button>
                           <input type="text" style="display:none" name="spectatedPlayer" value="${user.name}"/>
