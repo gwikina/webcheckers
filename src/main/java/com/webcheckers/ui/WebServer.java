@@ -47,6 +47,7 @@ import spark.TemplateEngine;
 public class WebServer {
   private static final Logger LOG = Logger.getLogger(WebServer.class.getName());
 
+
   //
   // Constants
   //
@@ -65,6 +66,12 @@ public class WebServer {
   public static final String BACKUP_MOVE = "/backupMove";
   public static final String RESIGN_GAME = "/resignGame";
   public static final String EXIT_GAME = "/exit";
+
+  //Initializes the Games PlayerLobby.
+  public static PlayerLobby PLAYER_LOBBY = new PlayerLobby();
+
+  //Initializes the Game Center.
+  public static GameCenter GAME_CENTER = new GameCenter();
 
 
   //
