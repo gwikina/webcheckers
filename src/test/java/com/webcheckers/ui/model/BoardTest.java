@@ -96,5 +96,6 @@ public class BoardTest {
     public void testGetRow() {
         Space[][] boardArray = new Space[8][8];
         assertNotNull(board.getRow(0));
+        assertNotNull(board.getBackwardsRow(0));
     }
 }
