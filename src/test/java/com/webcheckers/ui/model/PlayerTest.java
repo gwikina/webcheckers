@@ -49,6 +49,7 @@ public class PlayerTest {
         assertFalse(board.equals(testPlayer));
         assertTrue(testPlayer2.equals(testPlayer));
         assertFalse(testPlayer3.equals(testPlayer));
+        assertNotNull(testPlayer.equals(testPlayer3));
     }
 
 }
