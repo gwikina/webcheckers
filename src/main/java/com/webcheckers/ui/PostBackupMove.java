@@ -34,7 +34,23 @@ public class PostBackupMove implements Route{
 
     @Override
     public Object handle(Request request, Response response) {
-        response.redirect(WebServer.GAME_URL);
-        return null;
+        Player currentUser= request.session().attribute("currentUser");
+        Game game = this.gameCenter.getGame(currentUser);;
+        Move lastMove = game.getRecentMove();
+
+        Gson json = new Gson();
+        Message message;
+
+        if (lastMove!=null) {
+            message = Message.info("Success! Backed up");
+            game.getBoard().undoMove(lastMove);
+        }
+        else{
+            message = Message.info("Success! Backed up");
+            game.getBoard().undoMove(game.getMove(0));
+        }
+
+
+        return json.toJson(message);
     }
 }
