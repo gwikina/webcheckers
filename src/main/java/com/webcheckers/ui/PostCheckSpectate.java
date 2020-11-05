@@ -24,30 +24,18 @@ public class PostCheckSpectate implements Route {
     }
 
     public Object handle(Request request, Response response) {
-
-        String gameID = request.queryParams("gameID");
-        String spectatedPLayer = request.queryParams("spectatedPlayer");
-        System.out.println("check gameId is " + gameID);
         Game game;
 
-            System.out.println("checkif gameId is " + gameID);
-            System.out.println("checkif gameId is " + Integer.parseInt(gameID));
-            game = this.gameCenter.getGame(request.session().attribute("spectatedPLayer"));
+        game = this.gameCenter.getGame(request.session().attribute("spectatedPLayer"));
 
-
-
-        Player currentUser= request.session().attribute("currentUser");
         Message message;
 
-            //Player redPlayer = game.getRedPlayer();
-            //Player whitePlayer = game.getWhitePlayer();
         System.out.println(game);
-            if (!game.isGameOver()) {
-                message = Message.info("true");
-            } else{
-                message = Message.info("info:true");
-            }
-
+        if (game != null) {
+            message = Message.info("true");
+        } else {
+            message = Message.info("The game has ended please Exit");
+        }
 
         Gson json = new Gson();
         return json.toJson(message);

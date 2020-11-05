@@ -77,21 +77,23 @@ public class GameCenter {
         return null;
     }
 
-    /**
-     * Getter to get the current game ID.
-     * @param gameID gameID
-     * @return null or game
-     */
-    public Game getGame(int gameID){
-        //For each game withing List GamesOver
-        for(Game game : activeGames.values()){
-            if(game.getGameID() == gameID){
-                return game;
-            }
-        }
-        //If the game ids do not match up return null.
-        return null;
-    }
+//    /**
+//     * Getter to get the current game ID.
+//     * @param gameID gameID
+//     * @return null or game
+//     */
+//    public Game getGameOver(Player player){
+//        //For each list of players within the activeGames Hashmap
+//        for(List<Player> players : gamesOver.keySet()){
+//            //If HashMap key contains a player
+//            if(players.contains(player)){
+//                //returns HashMap key for the active game.
+//                return activeGames.get(players);
+//            }
+//        }
+//        //If there are no players return null.
+//        return null;
+//    }
 
     /**
      * Determines if there are players in the game.
