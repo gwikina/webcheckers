@@ -101,5 +101,10 @@ public class GetHomeRouteTest {
         when(session.attribute("Player")).thenReturn(currPlayer);
 
         CuT.handle(request, response);
+
+        currPlayer = null;
+        when(session.attribute("Player")).thenReturn(currPlayer);
+
+        CuT.handle(request, response);
     }
 }
