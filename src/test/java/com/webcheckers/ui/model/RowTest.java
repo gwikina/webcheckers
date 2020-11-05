@@ -32,4 +32,9 @@ public class RowTest {
         // Analyze results
         assertEquals(1, row.getIndex());
     }
+
+    @Test
+    public void testIterator() {
+        assertNotNull(row.iterator());
+    }
 }

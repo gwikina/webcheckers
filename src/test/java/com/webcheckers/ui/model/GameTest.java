@@ -86,4 +86,31 @@ public class GameTest {
         // Analyze results
         assertEquals(game.playerList(), expectedPlayer);
     }
+
+    @Test
+    public void testGetNumMoves() {
+        assertEquals(game.getNumMoves(), 0);
+    }
+
+    @Test
+    public void testGetMove() {
+        Position start = new Position(0, 0);
+        Position end = new Position(1, 1);
+        Move move = new Move(start, end);
+        game.addMove(move);
+        assertEquals(move, game.getMove(0));
+    }
+
+    @Test
+    public void testGetOpponent() {
+        assertEquals(game.getOpponent(redPlayer), whitePlayer);
+        assertEquals(game.getOpponent(whitePlayer), redPlayer);
+    }
+
+    @Test
+    public void testIsGameOver() {
+        assertFalse(game.isGameOver());
+        game.setResignPlayer(redPlayer);
+        assertTrue(game.isGameOver());
+    }
 }
