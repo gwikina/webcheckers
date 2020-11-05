@@ -84,11 +84,15 @@ public class ValidateMove {
         return Validation.TOOFAR;
     }
 
+    public static boolean checkDoubleJump(Move move, Game game, boolean isTrue, Piece.Color color, Piece.Type type) {
+        return true;
+    }
+
 
     private static Validation validateJumpMove(Game game, Space start, Move move) {
 
         if (checkSimpleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())
-        || checkDoubleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType()) {
+        || checkDoubleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())) {
 
             return Validation.VALIDJUMP;
         } else
