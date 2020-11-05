@@ -110,5 +110,7 @@ public class GameTest {
     @Test
     public void testIsGameOver() {
         assertFalse(game.isGameOver());
+        game.setResignPlayer(redPlayer);
+        assertTrue(game.isGameOver());
     }
 }
