@@ -91,4 +91,13 @@ public class GameTest {
     public void testGetNumMoves() {
         assertEquals(game.getNumMoves(), 0);
     }
+
+    @Test
+    public void testGetMove() {
+        Position start = new Position(0, 0);
+        Position end = new Position(1, 1);
+        Move move = new Move(start, end);
+        game.addMove(move);
+        assertEquals(move, game.getMove(0));
+    }
 }
