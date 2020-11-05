@@ -86,4 +86,9 @@ public class GameTest {
         // Analyze results
         assertEquals(game.playerList(), expectedPlayer);
     }
+
+    @Test
+    public void testGetNumMoves() {
+        assertEquals(game.getNumMoves(), 0);
+    }
 }
