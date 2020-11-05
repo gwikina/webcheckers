@@ -91,4 +91,10 @@ public class BoardTest {
         board.undoMove(move1);
         assertEquals(board.getPiece(0, 0), piece1);
     }
+
+    @Test
+    public void testGetRow() {
+        Space[][] boardArray = new Space[8][8];
+        assertNotNull(board.getRow(0));
+    }
 }
