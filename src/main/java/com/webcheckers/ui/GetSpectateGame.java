@@ -27,18 +27,17 @@ public class GetSpectateGame implements Route {
         final Map<String, Object> vm = new HashMap<>();
         Player currentUser = request.session().attribute("currentUser");
         String spectatedPLayer = request.queryParams("spectatedPlayer");
+        if (spectatedPLayer!=null){
+            request.session().attribute("spectatedPLayer", this.lobby.getUser(spectatedPLayer));
+        }
 
-        String gameID = request.queryParams("gameID");
-        System.out.println("gameId is " + gameID);
         Game game;
         Board board;
         BoardView boardView;
 
-        if (gameID!=null) {
-            game = this.gameCenter.getGame(Integer.getInteger(gameID));
-        }else{
-            game = this.gameCenter.getGame(this.lobby.getUser(spectatedPLayer));
-        }
+
+        game = this.gameCenter.getGame(request.session().attribute("spectatedPLayer"));
+
 
         board = game.getBoard();
         if (board.getActiveColor() == Piece.Color.RED) {

@@ -32,7 +32,8 @@ public class PostCheckSpectate implements Route {
 
             System.out.println("checkif gameId is " + gameID);
             System.out.println("checkif gameId is " + Integer.parseInt(gameID));
-            game = this.gameCenter.getGame(Integer.parseInt(gameID)-1);
+            game = this.gameCenter.getGame(request.session().attribute("spectatedPLayer"));
+
 
 
         Player currentUser= request.session().attribute("currentUser");
