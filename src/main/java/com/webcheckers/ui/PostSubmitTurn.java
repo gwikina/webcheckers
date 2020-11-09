@@ -40,12 +40,24 @@ public class PostSubmitTurn implements Route{
         ValidateMove evaluator = new ValidateMove();
 
         Message message;
-        if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
-            message = Message.info("yeah");
+
+        //TODO IMPORTANT : We have the last move (even if unmade), and new move coordinates via game.setRecentMove(M);
+        //TODO: if we move the piece after one valid jump, the returned move only contains the new start and end position
+        if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID) {
+            message = Message.info("move completed");
             game.setRecentMove(M);
             game.doTurn(M);
             game.getBoard().changeActiveColor();
-        }else{
+        }else if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
+            game.setRecentMove(M);
+            game.doTurn(M);
+            if(evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
+                message = Message.error("Invalid Move: Please make the double jump");
+            }
+            else{message = Message.info("move completed");
+            game.getBoard().changeActiveColor();}
+        }
+        else{
             message = Message.error(evaluator.validateMove(game, M).toString());
         }
         return json.toJson(message);
