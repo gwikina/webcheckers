@@ -63,10 +63,10 @@ public class GetGameRoute implements Route {
                 //Player resigned game ending
                 if (game.getResignPlayer()!=null){
                    if (currentUser==game.getResignPlayer()) {
-                    modeOptions.put("gameOverMessage", "Resigned Successfully, Exit when ready");
+                    modeOptions.put("gameOverMessage", "Resigned Successfully, The game is over, Exit when ready");
                     }
                    else {
-                    modeOptions.put("gameOverMessage", "Congrats You won! Exit when ready");//TODO... all end of game messages
+                    modeOptions.put("gameOverMessage", "Congrats You won by default! Your opponent resigned, Exit when ready");//TODO... all end of game messages
                     }
                     vm.put("modeOptionsAsJSON", json.toJson(modeOptions));
                     vm.put("title", "WebCheckers");
@@ -82,7 +82,7 @@ public class GetGameRoute implements Route {
                 //Normal game end
                 else {
                     if (currentUser==game.getWinner()) {
-                        modeOptions.put("gameOverMessage", "Congrats You won by capturing all pieces! Exit when ready");
+                        modeOptions.put("gameOverMessage", "Congrats! You won by capturing all pieces! Exit when ready");
                     }
                     else {
                         modeOptions.put("gameOverMessage", "You lost... study, and improve your strategy...");//TODO... all end of game messages
