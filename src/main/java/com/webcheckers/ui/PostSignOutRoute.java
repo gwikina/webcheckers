@@ -21,11 +21,13 @@ public class PostSignOutRoute implements Route {
 
 
     private final TemplateEngine templateEngine;
+    private final GameCenter gameCenter;
+    private final PlayerLobby lobby;
 
-    private PlayerLobby lobby;
-    public PostSignOutRoute(TemplateEngine templateEngine, PlayerLobby lobby) {
+    public PostSignOutRoute(TemplateEngine templateEngine, PlayerLobby lobby, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.lobby = lobby;
+        this.gameCenter = gameCenter;
     }
 
     @Override
@@ -33,23 +35,23 @@ public class PostSignOutRoute implements Route {
         LOG.finer("PostSignOutRoute is invoked.");
 
         //Gets the Player from the session.
-        Player player = request.session().attribute("currentPlayer");
+        Player currentUser= request.session().attribute("currentUser");
 
         //Gets the PlayerLobby and GameCenter from the WebServer, and the Game
         //from the GameCenter.
-        PlayerLobby playerLobby = WebServer.PLAYER_LOBBY;
-        GameCenter gameCenter = WebServer.GAME_CENTER;
-        Game game = gameCenter.getGame(player);
+        PlayerLobby playerLobby = this.lobby;
+        GameCenter gameCenter = this.gameCenter;
+        Game game = gameCenter.getGame(currentUser);
 
         //Sets the resign Player to the player signing out if they were in a Game.
         if(game != null){
-            game.setResignPlayer(player);
+            game.setResignPlayer(currentUser);
         }
-
+        System.out.println(currentUser);
         //Removes the Player from the PlayerLobby's User, Player, and GamePlayer lists.
-        playerLobby.removeUser(player);
-        playerLobby.removePlayer(player);
-        playerLobby.removeGamePlayer(player);
+        playerLobby.removeUser(currentUser);
+        playerLobby.removePlayer(currentUser);
+        playerLobby.removeGamePlayer(currentUser);
 
         //Invalidates the session and redirects to the Home page.
         request.session().invalidate();

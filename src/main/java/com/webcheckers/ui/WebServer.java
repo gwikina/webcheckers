@@ -167,7 +167,7 @@ public class WebServer {
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
     post(LOBBY_URL, new PostSignInRoute(templateEngine, lobby));
     get(LOBBY_URL, new GetHomeRoute(templateEngine, lobby));
-    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby));
+    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine, lobby, gameCenter));
     get(SIGNOUT_URL, new GetHomeRoute(templateEngine, lobby));
     get(GAME_URL, new GetGameRoute(templateEngine, lobby, gameCenter));
     post(GAME_URL, new PostGameRoute(templateEngine, lobby, gameCenter));

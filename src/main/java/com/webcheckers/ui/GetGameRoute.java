@@ -55,7 +55,7 @@ public class GetGameRoute implements Route {
                 Gson json = new Gson();
                 final Map<String, Object> modeOptions = new HashMap<>(2);
                 modeOptions.put("isGameOver", true);
-                if (this.lobby.getGamePlayers().contains(game.getOpponent(currentUser))==false) {
+                if (!this.lobby.getGamePlayers().contains(game.getOpponent(currentUser))) {
                     this.gameCenter.addGameOver(game);
                 }
                 this.lobby.removeGamePlayer(currentUser);
