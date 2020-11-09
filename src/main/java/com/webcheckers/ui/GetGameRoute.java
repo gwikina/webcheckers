@@ -55,7 +55,9 @@ public class GetGameRoute implements Route {
                 Gson json = new Gson();
                 final Map<String, Object> modeOptions = new HashMap<>(2);
                 modeOptions.put("isGameOver", true);
-                this.gameCenter.addGameOver(game);
+                if (this.lobby.getGamePlayers().contains(game.getOpponent(currentUser))==false) {
+                    this.gameCenter.addGameOver(game);
+                }
                 this.lobby.removeGamePlayer(currentUser);
 
                 //Player resigned game ending
@@ -98,7 +100,7 @@ public class GetGameRoute implements Route {
                 }
             }
         }
-
+        //this shouldn't happen, but just in case
         else if (this.gameCenter.getGame(currentUser)==null){
             this.lobby.removeGamePlayer(currentUser);
             response.redirect(WebServer.HOME_URL);
