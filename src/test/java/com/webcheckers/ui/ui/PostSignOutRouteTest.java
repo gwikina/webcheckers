@@ -1,5 +1,6 @@
 package com.webcheckers.ui.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.ui.PostSignOutRoute;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,7 @@ public class PostSignOutRouteTest {
     private Session session;
     private Response response;
     private PlayerLobby lobby;
+    private GameCenter gc;
 
     /**
      * The setup of the PostSignOutRoute.
@@ -37,14 +39,7 @@ public class PostSignOutRouteTest {
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
         templateEngine = mock(TemplateEngine.class);
-        CuT = new PostSignOutRoute(templateEngine, lobby);
+        CuT = new PostSignOutRoute(templateEngine, lobby, gc);
     }
 
-    /**
-     * Tests the PostSignOut.
-     */
-    @Test
-    public void test_PostSignOut(){
-        assertEquals(CuT.handle(request, response), "");
-    }
 }

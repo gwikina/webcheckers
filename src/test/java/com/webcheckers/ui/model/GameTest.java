@@ -113,4 +113,24 @@ public class GameTest {
         game.setResignPlayer(redPlayer);
         assertTrue(game.isGameOver());
     }
+
+    @Test
+    public void testGetPiece() {
+        assertFalse(game.getBoard().noPieces());
+        Position start = new Position(1, 1);
+        Position end = new Position(2, 2);
+        Move move = new Move(start, end);
+        game.setRecentMove(move);
+        assertFalse(game.getBoard().noPieces());
+    }
+
+    @Test
+    public void testDoTurn() {
+        Position start = new Position(1, 1);
+        Position end = new Position(2, 2);
+        Move move = new Move(start, end);
+        game.setRecentMove(move);
+        game.doTurn(move);
+        assertTrue(game.isTurnMade());
+    }
 }
