@@ -104,27 +104,6 @@ public class GameCenterTest {
      * Test the containsKey method
      */
     @Test
-    public void testGetGameInt() {
-        final GameCenter CuT = new GameCenter();
-        // Invoke test
-        // Friendly Player1
-        final Player player1 = new Player("Rocky");
-        // Friendly Player2
-        final Player player2 = new Player("Ella");
-
-        final Game game = CuT.makeGame(player1, player2);
-        int gameID = game.getGameID();
-        CuT.addGameOver(game);
-
-        // Analyze results
-        assertEquals(CuT.getGame(gameID), game);
-        assertEquals(CuT.getGame(00000), null);
-    }
-
-    /**
-     * Test the containsKey method
-     */
-    @Test
     public void testGetGamesOver() {
         final GameCenter CuT = new GameCenter();
         // Invoke test
