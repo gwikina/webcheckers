@@ -41,5 +41,5 @@ public class PostSignOutRouteTest {
         templateEngine = mock(TemplateEngine.class);
         CuT = new PostSignOutRoute(templateEngine, lobby, gc);
     }
-    
+
 }
