@@ -14,8 +14,11 @@ import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.ValidateMove;
 import com.webcheckers.util.Message;
-import spark.*;
-
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.TemplateEngine;
 public class PostSubmitTurn implements Route{
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
@@ -36,21 +39,13 @@ public class PostSubmitTurn implements Route{
         Move M = game.getMove(game.getNumMoves()-1);
         ValidateMove evaluator = new ValidateMove();
 
-        Message message = null;
-
-
-        //TODO IMPORTANT : We have the last move (even if unmade), and new move coordinates via game.setRecentMove(M);
-        //TODO: if we move the piece after one valid jump, the returned move only contains the new start and end position
-        if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID) {
-            message = Message.info("move completed");
+        Message message;
+        if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
+            message = Message.info("yeah");
             game.setRecentMove(M);
             game.doTurn(M);
             game.getBoard().changeActiveColor();
-        }else if (M.getValidState() == ValidateMove.Validation.VALIDJUMP) {
-            game.doTurn(M);
-            Spark.post(WebServer.VALIDATE_MOVE, new PostValidateMove(gameCenter));
-        }
-        else{
+        }else{
             message = Message.error(evaluator.validateMove(game, M).toString());
         }
         return json.toJson(message);

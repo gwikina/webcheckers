@@ -35,7 +35,6 @@ public class ValidateMove {
             if (teamHasJump(game, piece.getColor()))
                 return Validation.JUMPNEEDED;
 
-
             return validateSimpleMove(piece.getColor(), piece.getType(), startPos, endPos);
 
         }
