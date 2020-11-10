@@ -46,11 +46,6 @@ public class ValidateMove {
             return validateJumpMove(game, start, move);
         }
 
-        if (rowChange == 4){
-
-            return validateDoubleJumpMove(game, start, move);
-        }
-
         return Validation.TOOFAR;
 
     }
@@ -92,15 +87,6 @@ public class ValidateMove {
     private static Validation validateJumpMove(Game game, Space start, Move move) {
 
         if (checkSimpleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())) {
-            return Validation.VALIDJUMP;
-        } else
-            return Validation.TOOFAR;
-
-    }
-
-    private static Validation validateDoubleJumpMove(Game game, Space start, Move move) {
-
-        if (checkDoubleJump(move, game, true, start.getPiece().getColor(), start.getPiece().getType())) {
             return Validation.VALIDJUMP;
         } else
             return Validation.TOOFAR;
@@ -232,61 +218,5 @@ public class ValidateMove {
         return false;
     }
 
-    private static boolean checkDoubleJump(Move move, Game game, boolean realMove, Piece.Color color, Piece.Type type) {
-
-
-        Board model = game.getBoard();
-
-        Position start = move.getStart();
-        Position end = move.getEnd();
-
-        if(end.getRow() < 0 || end.getRow() > 7)
-            return false;
-        if(end.getCell() < 0 || end.getCell() > 7)
-            return false;
-
-
-        int rowdif = start.getRow() - end.getRow();
-        int coldif = Math.abs(start.getCell() - end.getCell());
-
-
-        if (rowdif > 0 && type == Piece.Type.SINGLE && color == Piece.Color.WHITE)
-            return false;
-
-        if (rowdif < 0 && type == Piece.Type.SINGLE && color == Piece.Color.RED)
-            return false;
-
-        rowdif = Math.abs(rowdif);
-
-        if (coldif == 4 && rowdif == 4) {
-
-            Position taken = new Position((start.getRow() + end.getRow()) / 4, (start.getCell() + end.getCell()) / 4);
-            Piece takenPiece = model.getPiece(taken.getRow(), taken.getCell());
-            Piece startPiece = model.getPiece(start.getRow(), start.getCell());
-
-            if(model.getPiece(end.getRow(),end.getCell()) != null){
-                return false;
-            }
-
-            Piece.Color colorUsed;
-            if (takenPiece != null) {
-                if (startPiece != null) {
-                    colorUsed = startPiece.getColor();
-                } else {
-                    colorUsed = color;
-                }
-                if (takenPiece.getColor() == colorUsed) {
-                    return false;
-                } else {
-                    if (realMove) {
-                        move.setTakenPosition(taken);
-                        move.setTakenPiece(takenPiece);
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
 }
