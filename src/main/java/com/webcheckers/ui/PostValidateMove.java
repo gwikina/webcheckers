@@ -33,19 +33,21 @@ public class PostValidateMove implements Route{
         Board board = game.getBoard();
         Gson json = new Gson();
         Move M = json.fromJson(move, Move.class);
-        ValidateMove evaluator = new ValidateMove();
+        new ValidateMove();
         Message message = null;
-
-        if (evaluator.validateMove(game, M)== ValidateMove.Validation.TOOFAR){
+        if(board.getSpace(M.getStart().getRow(),M.getStart().getCell()).getPiece() == null){
+            M.setStart(game.getRecentMove().getStart());
+        }
+        if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.TOOFAR){
             M.setValidState(ValidateMove.Validation.TOOFAR);
             message = Message.error("Invalid Move: Please Move a Shorter Distance");
-        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.OCCUPIED) {
+        } else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.OCCUPIED) {
             M.setValidState(ValidateMove.Validation.OCCUPIED);
             message = Message.error("Invalid Move: Please Move to an Open Tile");
-        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.JUMPNEEDED) {
+        } else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.JUMPNEEDED) {
             M.setValidState(ValidateMove.Validation.JUMPNEEDED);
             message = Message.error("Invalid Move: Please Jump over the Opponent");
-        } else if (evaluator.validateMove(game, M)== ValidateMove.Validation.VALIDJUMP) {
+        } else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.VALIDJUMP) {
             Piece piece = board.getPiece(M.getStart().getRow(), M.getStart().getCell());
             Piece.Type type;
 
@@ -59,6 +61,7 @@ public class PostValidateMove implements Route{
 
             if(ValidateMove.pieceHasJump(M.getEnd(), game, piece.getColor(), type, false)){
                 M.setValidState(ValidateMove.Validation.VALIDJUMP);
+                System.out.println(M.getValidState());
                 message = Message.info("Press submit and then jump again");
             }
 
@@ -66,7 +69,7 @@ public class PostValidateMove implements Route{
             message = Message.info("This is a valid Jump");
             game.setRecentMove(M);
         }
-        else if (evaluator.validateMove(game, M)== ValidateMove.Validation.VALID) {
+        else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.VALID) {
             M.setValidState(ValidateMove.Validation.VALID);
             message = Message.info("Valid Move");
             game.setRecentMove(M);
