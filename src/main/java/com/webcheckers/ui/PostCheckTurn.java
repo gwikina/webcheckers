@@ -40,7 +40,7 @@ public class PostCheckTurn implements Route{
             } else if (currentUser == whitePlayer && game.getBoard().getActiveColor() == Piece.Color.WHITE && !game.isGameOver()) {
                 message = Message.info("true");
             } else {
-                message = Message.info("false");
+                message = Message.info("true");
             }
         }
         else {

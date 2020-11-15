@@ -55,9 +55,6 @@ public class GetGameRoute implements Route {
                 Gson json = new Gson();
                 final Map<String, Object> modeOptions = new HashMap<>(2);
                 modeOptions.put("isGameOver", true);
-                if (!this.lobby.getGamePlayers().contains(game.getOpponent(currentUser))) {
-                    this.gameCenter.addGameOver(game);
-                }
                 this.lobby.removeGamePlayer(currentUser);
 
                 //Player resigned game ending
@@ -77,6 +74,9 @@ public class GetGameRoute implements Route {
                     vm.put("whitePlayer", game.getWhitePlayer());
                     vm.put("activeColor", board.getActiveColor());
                     vm.put("board", boardView);
+                    if (!this.lobby.getGamePlayers().contains(game.getOpponent(currentUser))) {
+                        this.gameCenter.addGameOver(game);
+                    }
                     return templateEngine.render(new ModelAndView(vm, "game.ftl"));
                 }
                 //Normal game end
@@ -96,6 +96,9 @@ public class GetGameRoute implements Route {
                     vm.put("whitePlayer", game.getWhitePlayer());
                     vm.put("activeColor", board.getActiveColor());
                     vm.put("board", boardView);
+                    if (!this.lobby.getGamePlayers().contains(game.getOpponent(currentUser))) {
+                        this.gameCenter.addGameOver(game);
+                    }
                     return templateEngine.render(new ModelAndView(vm, "game.ftl"));
                 }
             }
