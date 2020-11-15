@@ -28,55 +28,44 @@ public class PostValidateMove implements Route{
     @Override
     public Object handle(Request request, Response response) {
         String move = request.queryParams("actionData");
-        Player currentUser= request.session().attribute("currentUser");
+        Player currentUser = request.session().attribute("currentUser");
         Game game = this.gameCenter.getGame(currentUser);
         Board board = game.getBoard();
         Gson json = new Gson();
         Move M = json.fromJson(move, Move.class);
         new ValidateMove();
+        //#essential, becuase double jump makes the turn on a check so it would try to take  the same peices multiple times
+        ValidateMove.Validation validation = ValidateMove.validateMove(game, M);
         Message message = null;
-        if(board.getSpace(M.getStart().getRow(),M.getStart().getCell()).getPiece() == null){
+        if (board.getSpace(M.getStart().getRow(), M.getStart().getCell()).getPiece() == null) {
             M.setStart(game.getRecentMove().getStart());
         }
-        if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.TOOFAR){
+        if (validation == ValidateMove.Validation.TOOFAR) {
             M.setValidState(ValidateMove.Validation.TOOFAR);
             message = Message.error("Invalid Move: Please Move a Shorter Distance");
-        } else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.OCCUPIED) {
+        } else if (validation == ValidateMove.Validation.OCCUPIED) {
             M.setValidState(ValidateMove.Validation.OCCUPIED);
             message = Message.error("Invalid Move: Please Move to an Open Tile");
-        } else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.JUMPNEEDED) {
+        } else if (validation == ValidateMove.Validation.JUMPNEEDED) {
             M.setValidState(ValidateMove.Validation.JUMPNEEDED);
             message = Message.error("Invalid Move: Please Jump over the Opponent");
-        } else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.VALIDJUMP) {
-            Piece piece = board.getPiece(M.getStart().getRow(), M.getStart().getCell());
-            Piece.Type type;
-
-            //Sets the Pieces type to King if it reaches the end of the Board.
-            if(M.getEnd().getRow() == 0 || M.getEnd().getRow() == 7) {
-                type = Piece.Type.KING;
-            }
-            else {
-                type = piece.getType();
-            }
-
-            if(ValidateMove.pieceHasJump(M.getEnd(), game, piece.getColor(), type, false)){
-                M.setValidState(ValidateMove.Validation.VALIDJUMP);
-                System.out.println(M.getValidState());
-                message = Message.info("Press submit and then jump again");
-            }
-
-            M.setValidState(ValidateMove.Validation.VALID);
+        } else if (validation == ValidateMove.Validation.DOUBLEJUMPNEEDED) {
+            M.setValidState(ValidateMove.Validation.DOUBLEJUMPNEEDED);
+            message = Message.error("Invalid Move: Please DoubleJump over the Opponent");
+        } else if (validation == ValidateMove.Validation.SIDEWAYS) {
+            M.setValidState(ValidateMove.Validation.SIDEWAYS);
+            message = Message.error("Invalid Move: cannot move sideways");
+        } else if (validation == ValidateMove.Validation.VALIDJUMP) {
             message = Message.info("This is a valid Jump");
             game.setRecentMove(M);
-        }
-        else if (ValidateMove.validateMove(game, M)== ValidateMove.Validation.VALID) {
-            M.setValidState(ValidateMove.Validation.VALID);
+        } else if (validation == ValidateMove.Validation.VALID) {
             message = Message.info("Valid Move");
             game.setRecentMove(M);
         }
+        System.out.println(ValidateMove.validateMove(game, M));
         game.addMove(M);
-
         return json.toJson(message);
+
     }
 
 }

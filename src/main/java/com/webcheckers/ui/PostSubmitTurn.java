@@ -40,14 +40,15 @@ public class PostSubmitTurn implements Route{
         ValidateMove evaluator = new ValidateMove();
 
         Message message;
-        if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
+        //if (evaluator.validateMove(game, M) == ValidateMove.Validation.VALID || evaluator.validateMove(game, M) == ValidateMove.Validation.VALIDJUMP){
+
             message = Message.info("yeah");
             game.setRecentMove(M);
             game.doTurn(M);
             game.getBoard().changeActiveColor();
-        }else{
-            message = Message.error(evaluator.validateMove(game, M).toString());
-        }
+//        }else{
+//            message = Message.error(evaluator.validateMove(game, M).toString());
+//        }
         return json.toJson(message);
     }
 }
