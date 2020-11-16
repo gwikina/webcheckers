@@ -133,4 +133,13 @@ public class GameTest {
         game.doTurn(move);
         assertTrue(game.isTurnMade());
     }
+
+    @Test
+    public void testTakePiece() {
+        Position start = new Position(1, 1);
+        Position end = new Position(2, 2);
+        Move move = new Move(start, end);
+        game.setRecentMove(move);
+        assertNull(game.getRecentMove().getTakenPiece());
+    }
 }
