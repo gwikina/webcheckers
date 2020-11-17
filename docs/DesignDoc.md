@@ -147,6 +147,9 @@ with the WebCheckers application.
 #####PostGameRoute
 ![The WebCheckers Sequence Diagram](SequenceDiagram.png)
 
+#####SignInRoute
+![The WebCheckers Sequence Diagram](StateDiagram2.png)
+
 ### Application Tier
 > The two main classes in our Application Tier are the GameCenter
 > class and the PlayerLobby class. 
@@ -186,15 +189,13 @@ with the WebCheckers application.
 >the security and stability of our code.
 
 ### Acceptance Testing
-> Thus far, five of our user stories have completely passed. These
->stories include sign in, start a game, capture pieces, take a turn,
->and undo a move. We are currently in the process of implementing the 
->resign from game user story, but we plan to finish this story in the near
->future. 
+> Thus far, seven of our user stories have completely passed. These
+>stories include sign in, start a game, capture pieces, take a turn, resign,
+>and undo a move. 
 
 ### Unit Testing and Code Coverage
 > We used JaCoCo to generate coverage reports of our testing code.
->Overall, we achieved code coverage of 52%. Our Application tier has
+>Overall, we achieved code coverage of 50%. Our Application tier has
 >100% coverage, whereas our UI tier has 12% coverage. In the future,
 >we plan to add more tests to the UI tier to ensure security and stability
 >of the UI tier code. 
