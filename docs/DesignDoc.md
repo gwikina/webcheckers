@@ -92,7 +92,7 @@ As a Player, I want to win the game by capturing all of my opponent pieces so th
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](DomainModel.jpg)
+![The WebCheckers Domain Model](Updated Domain Model.jpg)
 
 > _Our domain model consists of players, the checkers game, and
 >how these entities interact with each other. For example, a player
